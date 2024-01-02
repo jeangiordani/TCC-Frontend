@@ -36,6 +36,7 @@ export const StyledHeader = styled.header`
     ul {
         list-style: none;
         display: flex;
+        align-items: center;
     }
 
     li {
@@ -48,14 +49,35 @@ export const StyledHeader = styled.header`
         height: 20px;
     }
 
-    .user-info {
+    .user {
         display: flex;
-        
     }
 
-    .photo {
+    .user-info {
+        display: flex;
+        margin-left: 5px;
+        flex-direction: column;
+        justify-content: center;
+        cursor: default;
+    }
+
+    .user-photo {
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        border: 1px solid var(--primary);
+    }
+
+    .name {
+        font-size: 12px;
+        font-weight: 700;
+        font-family: 'Roboto-Bold';
+    }
+
+    .role {
+        font-size: 10px;
+        font-weight: 500;
+        font-family: 'Roboto-Regular';
+        opacity: 0.5;
     }
 `;
