@@ -1,9 +1,11 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import RobotoThin from "./assets/fonts/Roboto/Roboto-Thin.ttf";
 import RobotoRegular from "./assets/fonts/Roboto/Roboto-Regular.ttf";
 import RobotoBold from "./assets/fonts/Roboto/Roboto-Bold.ttf";
-
+import { Home } from "./pages/Home";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -38,14 +40,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App= ()=> {
+const App = () => {
+    return (
+        <>
+            <BrowserRouter>
+                <GlobalStyle />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
+};
 
-  return (
-    <>
-      <GlobalStyle />
-      <h1>React App</h1>
-    </>
-  )
-}
-
-export default App
+export default App;
