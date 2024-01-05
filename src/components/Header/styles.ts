@@ -81,3 +81,50 @@ export const StyledHeader = styled.header`
         opacity: 0.5;
     }
 `;
+
+export const AuthButton = styled.div`
+    display : flex;
+    height: 100%;
+    
+    .margin-left{
+        margin-left: 14px;
+    }
+
+    .button-login {
+        width: 110px;
+        height: 40px;
+        text-decoration: none;
+        font-family: 'Roboto-Bold';
+        background-color: var(--primary);
+        color: #FFFFFF;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .button-login:hover {
+        cursor: pointer;
+        background-color: var(--secondary);
+        color:var(--primary);
+    }
+
+    .button-register {
+        width: 110px;
+        height: 40px;
+        text-decoration: none;
+        font-family: 'Roboto-Bold';
+        background-color: #FFFFFF;
+        color:var(--primary);
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 5px;
+        border: 1px solid var(--secondary);
+    }
+
+    .button-register:hover {
+        cursor: pointer;
+        background-color: var(--secondary);
+        color:var(--primary);
+    }
+`;

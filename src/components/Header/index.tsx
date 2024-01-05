@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
 
-import { StyledHeader, Container } from "./styles";
+import { StyledHeader, Container, AuthButton } from "./styles";
 import logo from "../../assets/icons/logo-png.svg";
 import profile from "../../assets/icons/profile-round-1346-svgrepo-com.svg";
 import exam from "../../assets/icons/exam-svgrepo-com.svg";
@@ -9,14 +9,15 @@ import userImage from "../../assets/images/user.png";
 // import userNoImage from "../../assets/images/user-no-picture.png";
 
 export const Header = () => {
-    const [isAuth, setIsAuth] = useState(true);
+    const [isAuth, setIsAuth] = React.useState<boolean>(true);
     return (
         <Container>
             <StyledHeader>
                 <NavLink to="/" className="height">
                     <img src={logo} alt="Logo" className="logo svg-color" />
                 </NavLink>
-                {!isAuth || (
+
+                {isAuth ? (
                     <ul>
                         <li>
                             <NavLink to="/perfil">
@@ -50,6 +51,17 @@ export const Header = () => {
                             </div>
                         </li>
                     </ul>
+                ) : (
+                    <AuthButton>
+                        <Link to="/login">
+                            <button className="button-login">Login</button>
+                        </Link>
+                        <Link to="/cadastrar" className="margin-left">
+                            <button className="button-register">
+                                Cadastrar
+                            </button>
+                        </Link>
+                    </AuthButton>
                 )}
             </StyledHeader>
         </Container>
