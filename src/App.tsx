@@ -15,7 +15,39 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     box-sizing:border-box;
     overflow-x:hidden;
+    scrollbar-width: thin;
+  scrollbar-color: #A1A1A1 #EBEBEB;
   }
+
+  *::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 7px;
+  background-color: #EBEBEB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #A1A1A1;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #4F4F4F;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #4F4F4F;
+}
 
   @font-face {
     font-family: "Roboto-Thin";
