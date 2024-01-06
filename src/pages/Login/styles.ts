@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const Container = styled.main`
     display: flex;
@@ -13,6 +14,12 @@ export const Container = styled.main`
         font-family: "Roboto-Bold";
         color: var(--primary);
         font-size: 2rem;
+    }
+
+    @media ${device.xs} {
+        .title {
+            font-size: 1.5rem;
+        }
     }
 `;
 
@@ -98,5 +105,9 @@ export const Form = styled.form`
         .error-input {
             border: 1px solid red;
         }
+    }
+
+    @media ${device.xs} {
+        width: 500px;
     }
 `;

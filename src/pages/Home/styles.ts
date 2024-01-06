@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { device } from '../../utils/breakpoints';
+import { device } from "../../utils/breakpoints";
 
 export const Container = styled.section`
     display: flex;
@@ -10,14 +10,13 @@ export const Container = styled.section`
     flex-direction: column;
 
     @media ${device.sm} {
-        .info{
+        .info {
             flex-direction: column;
             align-items: center;
-            
         }
-        .greetings{
+        .greetings {
             min-width: 100%;
-            
+
             align-items: center;
 
             .welcome {
@@ -26,22 +25,20 @@ export const Container = styled.section`
                 text-align: center;
             }
 
-            .info-paragraph{
+            .info-paragraph {
                 min-width: 100%;
                 text-align: center;
             }
-
         }
-        .image{
+        .image {
             min-width: 100%;
             order: -1;
         }
     }
 
     @media ${device.lg} {
-        .info{
+        .info {
             margin-top: 30px;
-            
         }
     }
 `;
@@ -53,12 +50,12 @@ export const Content = styled.div`
     height: 100%;
     flex-direction: column;
     /* min-height: 80vh; */
-    .info{
+    .info {
         display: flex;
-        flex:1;
+        flex: 1;
     }
 
-    .greetings{
+    .greetings {
         width: 50%;
         /* background-color: red; */
         display: flex;
@@ -66,14 +63,14 @@ export const Content = styled.div`
         justify-content: center;
 
         .welcome {
-            font-family: 'Roboto-Regular', sans-serif;
+            font-family: "Roboto-Regular", sans-serif;
             font-size: 2.5rem;
-            color:var(--primary);
+            color: var(--primary);
             text-shadow: 1px 2px 3px rgba(15, 47, 129, 0.22);
         }
 
-        .info-paragraph{
-            font-family: 'Roboto-Regular';
+        .info-paragraph {
+            font-family: "Roboto-Regular";
             font-size: 1.25rem;
             width: 80%;
             color: black;
@@ -82,13 +79,12 @@ export const Content = styled.div`
         }
     }
 
-    .image{
+    .image {
         width: 50%;
         display: flex;
         align-items: center;
-        
 
-        .home-image{
+        .home-image {
             min-width: 300px;
             min-height: 70%;
             height: 90%;
@@ -96,13 +92,25 @@ export const Content = styled.div`
         }
     }
 
+    @media ${device.xs} {
+        .greetings {
+            .info-paragraph {
+                font-family: "Roboto-Regular";
+                font-size: 0.8rem;
+                min-width: 100%;
+                color: black;
+                opacity: 50%;
+                margin-top: 20px;
+            }
+        }
+    }
 `;
 
 export const ButtonArea = styled.div`
-    display : flex;
+    display: flex;
     margin-top: 40px;
 
-    .margin-left{
+    .margin-left {
         margin-left: 14px;
     }
 
@@ -110,9 +118,9 @@ export const ButtonArea = styled.div`
         width: 110px;
         height: 40px;
         text-decoration: none;
-        font-family: 'Roboto-Bold';
+        font-family: "Roboto-Bold";
         background-color: var(--primary);
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 16px;
         font-weight: 700;
         border-radius: 5px;
@@ -122,16 +130,16 @@ export const ButtonArea = styled.div`
     .button-colored:hover {
         cursor: pointer;
         background-color: var(--secondary);
-        color:var(--primary);
+        color: var(--primary);
     }
 
     .button-uncolored {
         width: 110px;
         height: 40px;
         text-decoration: none;
-        font-family: 'Roboto-Bold';
-        background-color: #FFFFFF;
-        color:var(--primary);
+        font-family: "Roboto-Bold";
+        background-color: #ffffff;
+        color: var(--primary);
         font-size: 16px;
         font-weight: 700;
         border-radius: 5px;
@@ -141,7 +149,7 @@ export const ButtonArea = styled.div`
     .button-uncolored:hover {
         cursor: pointer;
         background-color: var(--secondary);
-        color:var(--primary);
+        color: var(--primary);
     }
 
     @media ${device.sm} {
@@ -158,7 +166,7 @@ export const ButtonArea = styled.div`
 export const CardArea = styled.div`
     width: 100%;
     border-top: 1px solid var(--secondary);
-    
+
     height: 250px;
 
     ul {
@@ -167,7 +175,6 @@ export const CardArea = styled.div`
         display: flex;
         justify-content: space-around;
         align-items: center;
-        flex-wrap: wrap;
     }
 
     li {
@@ -180,16 +187,31 @@ export const CardArea = styled.div`
     }
 
     .title {
-        font-family: 'Roboto-Bold';
+        font-family: "Roboto-Bold";
         font-size: 1.5rem;
         color: var(--primary);
         margin-bottom: 20px;
     }
 
     .text {
-        font-family: 'Roboto-Regular';
+        font-family: "Roboto-Regular";
         font-size: 1rem;
         color: black;
         opacity: 50%;
+    }
+
+    @media ${device.md} {
+        margin-top: 20px;
+        ul {
+            flex-direction: column;
+            align-items: center;
+            height: auto;
+        }
+
+        li {
+            margin-top: 20px;
+            width: 80%;
+            height: auto;
+        }
     }
 `;
