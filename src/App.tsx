@@ -6,6 +6,7 @@ import RobotoThin from "./assets/fonts/Roboto/Roboto-Thin.ttf";
 import RobotoRegular from "./assets/fonts/Roboto/Roboto-Regular.ttf";
 import RobotoBold from "./assets/fonts/Roboto/Roboto-Bold.ttf";
 import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -80,6 +81,7 @@ const App = () => {
                 <GlobalStyle />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </BrowserRouter>
         </>
