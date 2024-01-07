@@ -8,9 +8,10 @@ export const Container = styled.main`
     width: 100%;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 10px;
 
     .title {
-        margin-top: 40px;
+        margin-top: 10px;
         font-family: "Roboto-Bold";
         color: var(--primary);
         font-size: 2rem;
@@ -95,6 +96,11 @@ export const Form = styled.form`
                 font-size: 0.9rem;
                 margin-left: 10px;
             }
+        }
+
+        .image-input {
+            margin-top: 10px;
+            width: 100%;
         }
 
         .link {

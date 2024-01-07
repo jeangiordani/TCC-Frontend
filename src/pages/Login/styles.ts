@@ -10,7 +10,7 @@ export const Container = styled.main`
     flex-direction: column;
 
     .title {
-        margin-top: 40px;
+        margin-top: 10px;
         font-family: "Roboto-Bold";
         color: var(--primary);
         font-size: 2rem;

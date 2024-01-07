@@ -20,6 +20,7 @@ const Register = () => {
     } = useForm<IFormInputs>({
         resolver: yupResolver(registrationSchema),
     });
+    const [preview, setPreview] = React.useState("");
 
     const onSubmit: SubmitHandler<IFormInputs> = (data) => {
         if (data.role === "true") {
@@ -27,7 +28,17 @@ const Register = () => {
         } else {
             data.role = "ROLE_STUDENT";
         }
-        console.log(data.role);
+        console.log(data);
+    };
+
+    const handleUploadedFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files ? event.target.files[0] : undefined;
+
+        if (file !== undefined) {
+            const urlImage = URL.createObjectURL(file);
+
+            setPreview(urlImage);
+        }
     };
     return (
         <>
@@ -91,6 +102,19 @@ const Register = () => {
                                 Sou professor
                             </span>
                         </label>
+                    </div>
+                    <div className="input-wrapper">
+                        <img src={preview} alt="" className="image-input" />
+                        <label className="label" htmlFor="image">
+                            Imagem
+                        </label>
+                        <input
+                            {...register("image")}
+                            id="image"
+                            className={`input`}
+                            type="file"
+                            onChange={handleUploadedFile}
+                        />
                     </div>
                     <div className="input-wrapper">
                         <span className="label">
