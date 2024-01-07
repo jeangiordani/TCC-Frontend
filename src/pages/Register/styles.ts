@@ -79,6 +79,24 @@ export const Form = styled.form`
             background-color: rgba(0, 0, 0, 0.02);
         }
 
+        .input-checkbox {
+            display: flex;
+            margin-top: 10px;
+            align-items: center;
+
+            .checkbox {
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+            }
+            .label-checkbox {
+                font-family: "Roboto-Regular";
+                color: rgba(0, 0, 0, 0.7);
+                font-size: 0.9rem;
+                margin-left: 10px;
+            }
+        }
+
         .link {
             font-family: "Roboto-Bold";
             color: var(--primary);
