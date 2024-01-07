@@ -6,7 +6,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const StyledHeader = styled.header`
@@ -17,7 +17,7 @@ export const StyledHeader = styled.header`
     align-items: center;
     justify-content: space-between;
 
-    .height{
+    .height {
         height: 100%;
         display: flex;
         align-items: center;
@@ -30,7 +30,8 @@ export const StyledHeader = styled.header`
     }
 
     .svg-color {
-        filter: invert(14%) sepia(57%) saturate(3117%) hue-rotate(211deg) brightness(95%) contrast(94%);
+        filter: invert(14%) sepia(57%) saturate(3117%) hue-rotate(211deg)
+            brightness(95%) contrast(94%);
     }
 
     ul {
@@ -71,22 +72,23 @@ export const StyledHeader = styled.header`
     .name {
         font-size: 12px;
         font-weight: 700;
-        font-family: 'Roboto-Bold';
+        font-family: "Roboto-Bold";
     }
 
     .role {
         font-size: 10px;
         font-weight: 500;
-        font-family: 'Roboto-Regular';
+        font-family: "Roboto-Regular";
         opacity: 0.5;
     }
 `;
 
 export const AuthButton = styled.div`
-    display : flex;
+    display: flex;
     height: 100%;
-    
-    .margin-left{
+    align-items: center;
+
+    .margin-left {
         margin-left: 14px;
     }
 
@@ -94,9 +96,9 @@ export const AuthButton = styled.div`
         width: 110px;
         height: 40px;
         text-decoration: none;
-        font-family: 'Roboto-Bold';
+        font-family: "Roboto-Bold";
         background-color: var(--primary);
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 16px;
         font-weight: 700;
         border-radius: 5px;
@@ -106,16 +108,16 @@ export const AuthButton = styled.div`
     .button-login:hover {
         cursor: pointer;
         background-color: var(--secondary);
-        color:var(--primary);
+        color: var(--primary);
     }
 
     .button-register {
         width: 110px;
         height: 40px;
         text-decoration: none;
-        font-family: 'Roboto-Bold';
-        background-color: #FFFFFF;
-        color:var(--primary);
+        font-family: "Roboto-Bold";
+        background-color: #ffffff;
+        color: var(--primary);
         font-size: 16px;
         font-weight: 700;
         border-radius: 5px;
@@ -125,6 +127,6 @@ export const AuthButton = styled.div`
     .button-register:hover {
         cursor: pointer;
         background-color: var(--secondary);
-        color:var(--primary);
+        color: var(--primary);
     }
 `;

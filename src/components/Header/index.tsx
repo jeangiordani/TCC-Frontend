@@ -9,7 +9,7 @@ import userImage from "../../assets/images/user.png";
 // import userNoImage from "../../assets/images/user-no-picture.png";
 
 export const Header = () => {
-    const [isAuth, setIsAuth] = React.useState<boolean>(true);
+    const [isAuth, setIsAuth] = React.useState<boolean>(false);
     return (
         <Container>
             <StyledHeader>

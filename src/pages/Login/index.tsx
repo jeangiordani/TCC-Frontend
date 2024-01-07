@@ -7,6 +7,7 @@ import { Footer } from "../../components/Footer";
 import { Container, Form } from "./styles";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../../validations/login";
+import { BackButton } from "../../components/BackButton";
 
 type IFormInputs = yup.InferType<typeof loginSchema>;
 
@@ -27,6 +28,7 @@ export const Login = () => {
         <>
             <Header />
             <Container>
+                <BackButton />
                 <h1 className="title">Faça Login na sua conta</h1>
                 <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
