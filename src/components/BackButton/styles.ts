@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BackButton = styled.div`
-    width: 95%;
+    width: 100%;
     display: flex;
     align-items: center;
     color: var(--primary);
@@ -10,6 +10,7 @@ export const BackButton = styled.div`
     padding: 10px;
     cursor: pointer;
     overflow: hidden;
+    margin-left: 10px;
 
     .svg-color {
         width: 25px;
