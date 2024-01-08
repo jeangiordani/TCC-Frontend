@@ -30,8 +30,7 @@ export const StyledHeader = styled.header`
     }
 
     .svg-color {
-        filter: invert(14%) sepia(57%) saturate(3117%) hue-rotate(211deg)
-            brightness(95%) contrast(94%);
+        filter: var(--primary-filter);
     }
 
     ul {

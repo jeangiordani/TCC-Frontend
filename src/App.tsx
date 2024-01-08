@@ -7,6 +7,7 @@ import RobotoBold from "./assets/fonts/Roboto/Roboto-Bold.ttf";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import Register from "./pages/Register";
+import MockExams from "./pages/MockExams";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -67,6 +68,8 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --primary: #0F2F81;
+    --primary-filter: invert(14%) sepia(57%) saturate(3117%) hue-rotate(211deg)
+            brightness(95%) contrast(94%);
     --secondary: #D6D6F6;
     --modal: rgba(15,47,129, 0.25);
     --green: #0F811A;
@@ -83,6 +86,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastrar" element={<Register />} />
+                    <Route path="/simulados" element={<MockExams />} />
                 </Routes>
             </BrowserRouter>
         </>
