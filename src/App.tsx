@@ -73,6 +73,7 @@ const GlobalStyle = createGlobalStyle`
     --secondary: #D6D6F6;
     --modal: rgba(15,47,129, 0.25);
     --green: #0F811A;
+    --green-filter:  invert(37%) sepia(29%) saturate(1908%) hue-rotate(83deg) brightness(93%) contrast(93%);
     --red: #D10000;
   }
 `;

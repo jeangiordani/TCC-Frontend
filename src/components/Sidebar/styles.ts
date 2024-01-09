@@ -4,7 +4,7 @@ export const Sidebar = styled.aside`
     display: flex;
     flex-direction: column;
     flex-grow: 0;
-    width: 250px;
+    min-width: 250px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     height: 100%;
 
