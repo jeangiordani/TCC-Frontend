@@ -63,6 +63,7 @@ export const Card = styled.div<{ $completed: boolean }>`
     -webkit-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
     -moz-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
     box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
+
     .card-content {
         width: 100%;
         height: 100%;
