@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const Container = styled.div`
     display: flex;
@@ -6,6 +7,10 @@ export const Container = styled.div`
     height: 100vh;
 
     justify-content: center;
+
+    @media ${device.sm} {
+        flex-direction: column;
+    }
 `;
 
 export const ContentContainer = styled.main`
@@ -38,6 +43,12 @@ export const Content = styled.div`
         width: 100%;
         margin: 10px 0;
     }
+
+    @media screen and (max-width: 1200px) {
+        .title {
+            overflow: hidden;
+        }
+    }
 `;
 
 export const Cards = styled.div`
@@ -46,6 +57,14 @@ export const Cards = styled.div`
     justify-content: flex-start;
     width: 100%;
     box-sizing: border-box;
+
+    @media ${device.sm} {
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 680px) {
+        justify-content: center;
+    }
 `;
 
 export const Card = styled.div<{ $completed: boolean }>`
@@ -140,5 +159,17 @@ export const Card = styled.div<{ $completed: boolean }>`
             border-radius: 5px;
             cursor: pointer;
         }
+    }
+
+    @media ${device.sm} {
+        width: 250px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    @media screen and (max-width: 680px) {
+        width: 250px;
+        margin-right: 5px;
+        margin-left: 5px;
     }
 `;

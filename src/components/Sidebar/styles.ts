@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const Sidebar = styled.aside`
     display: flex;
@@ -52,5 +53,14 @@ export const Sidebar = styled.aside`
         border-top: 1px solid rgba(0, 0, 0, 0.05);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         opacity: 1;
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 550px) and (max-width: 600px) {
+        height: 350px;
+    }
+
+    @media screen and (min-width: 600px) and (max-width: 1000px) {
+        min-width: 200px;
     }
 `;
