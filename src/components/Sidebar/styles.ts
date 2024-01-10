@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { device } from "../../utils/breakpoints";
 
 export const Sidebar = styled.aside`
     display: flex;
