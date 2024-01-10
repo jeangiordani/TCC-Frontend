@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import Register from "./pages/Register";
 import MockExams from "./pages/MockExams";
+import Profile from "./pages/Profile";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -88,6 +89,7 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/cadastrar" element={<Register />} />
                     <Route path="/simulados" element={<MockExams />} />
+                    <Route path="/perfil" element={<Profile />} />
                 </Routes>
             </BrowserRouter>
         </>

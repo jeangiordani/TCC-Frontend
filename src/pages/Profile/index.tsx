@@ -13,7 +13,7 @@ const Profile = () => {
                 <ContentContainer>
                     <Content>
                         <span className="title-wrapper">
-                            <h2 className="title">Simulados</h2>
+                            <h2 className="title">Perfil</h2>
                         </span>
                     </Content>
                 </ContentContainer>
