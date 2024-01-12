@@ -66,6 +66,7 @@ export const StyledHeader = styled.header`
         height: 40px;
         border-radius: 50%;
         border: 1px solid var(--primary);
+        object-fit: cover;
     }
 
     .name {

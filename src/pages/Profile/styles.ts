@@ -49,4 +49,109 @@ export const Content = styled.div`
             overflow: hidden;
         }
     }
+
+    .profile-area {
+        width: 50%;
+        height: 70%;
+        border-radius: 10px;
+        border: 1px solid var(--primary);
+
+        .commom-info {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+
+            .profile-picture {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+                object-fit: cover;
+            }
+
+            .user-name {
+                font-size: 12px;
+                font-weight: 700;
+                font-family: "Roboto-Bold";
+            }
+
+            .user-role {
+                font-size: 10px;
+                font-weight: 500;
+                font-family: "Roboto-Regular";
+                opacity: 0.5;
+            }
+        }
+
+        .profile-info {
+            margin: 0 auto;
+            width: 95%;
+
+            .email-wrapper {
+                font-family: "Roboto-Bold";
+                color: var(--primary);
+                font-size: 1rem;
+                margin-bottom: 10px;
+
+                span {
+                    color: black;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    font-family: "Roboto-Regular";
+                    opacity: 0.5;
+                }
+            }
+            .performance {
+                font-family: "Roboto-Bold";
+                color: var(--primary);
+                font-size: 1rem;
+
+                .best {
+                    font-family: "Roboto-Bold";
+                    color: white;
+                    font-size: 0.8rem;
+                    background-color: var(--green);
+                    width: 50%;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                }
+
+                .worst {
+                    font-family: "Roboto-Bold";
+                    color: white;
+                    font-size: 0.8rem;
+                    background-color: var(--red);
+                    width: 50%;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .link {
+                .button {
+                    width: 110px;
+                    height: 40px;
+                    text-decoration: none;
+                    font-family: "Roboto-Bold";
+                    background-color: var(--primary);
+                    color: #ffffff;
+                    font-size: 16px;
+                    font-weight: 700;
+                    border-radius: 5px;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 `;
