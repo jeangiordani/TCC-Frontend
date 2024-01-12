@@ -42,6 +42,7 @@ export const Content = styled.div`
         margin-bottom: 20px;
         width: 100%;
         margin: 10px 0;
+        overflow: hidden;
     }
 
     @media screen and (max-width: 1200px) {
@@ -52,12 +53,12 @@ export const Content = styled.div`
 
     .profile-area {
         width: 50%;
-        height: 70%;
+        height: 100%;
         border-radius: 10px;
         border: 1px solid var(--primary);
+        box-sizing: border-box;
 
         .commom-info {
-            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -88,6 +89,7 @@ export const Content = styled.div`
         .profile-info {
             margin: 0 auto;
             width: 95%;
+            height: 60%;
 
             .email-wrapper {
                 font-family: "Roboto-Bold";
@@ -150,6 +152,59 @@ export const Content = styled.div`
                     border-radius: 5px;
                     border: none;
                     cursor: pointer;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .profile-area {
+            width: 95%;
+            min-height: 500px;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .profile-area {
+            width: 95%;
+            min-height: 500px;
+
+            .profile-info {
+                margin: 0 auto;
+                width: 95%;
+                height: 60%;
+
+                .performance {
+                    .best {
+                        font-size: 0.75rem;
+                    }
+
+                    .worst {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .profile-area {
+            width: 95%;
+            min-height: 500px;
+
+            .profile-info {
+                margin: 0 auto;
+                width: 95%;
+                height: 60%;
+
+                .performance {
+                    .best {
+                        width: 100%;
+                    }
+
+                    .worst {
+                        width: 100%;
+                    }
                 }
             }
         }
