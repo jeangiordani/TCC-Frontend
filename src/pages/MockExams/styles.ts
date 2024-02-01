@@ -31,8 +31,11 @@ export const Content = styled.div`
     .title-wrapper {
         width: 100%;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         min-height: 40px;
+        align-items: center;
+        overflow-y: hidden;
+        height: 30px;
     }
 
     .title {
@@ -40,8 +43,21 @@ export const Content = styled.div`
         font-size: 1.2rem;
         color: var(--primary);
         margin-bottom: 20px;
-        width: 100%;
+        /* width: 100%; */
         margin: 10px 0;
+    }
+
+    .button {
+        font-family: "Roboto-Bold";
+        width: 100px;
+        height: 30px;
+        color: white;
+        background-color: var(--primary);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+        font-size: 0.7rem;
     }
 
     @media screen and (max-width: 1200px) {
@@ -129,6 +145,7 @@ export const Card = styled.div<{ $completed: boolean }>`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        overflow-y: hidden;
         .card-progress {
             display: flex;
             flex-direction: column;

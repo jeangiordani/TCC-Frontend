@@ -33,6 +33,9 @@ export const Content = styled.div`
         display: flex;
         justify-content: flex-start;
         min-height: 40px;
+        align-items: center;
+        overflow-y: hidden;
+        height: 30px;
     }
 
     .title {

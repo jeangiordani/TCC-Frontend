@@ -1,12 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Container, ContentContainer, Content, Cards, Card } from "./styles";
 import { Sidebar } from "../../components/Sidebar";
+import CustomModal from "../../components/Modal";
+import CreateMockExam from "./CreateMockExam";
 
 import mockExamIcon from "../../assets/icons/file-done-svgrepo-com.svg";
 import checkmark from "../../assets/icons/done-1478-svgrepo-com.svg";
-import { Link } from "react-router-dom";
 
 interface MockExamProps {
     id: number;
@@ -67,8 +70,19 @@ const mockExams: MockExamProps[] = [
 ];
 
 const MockExams = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+
     return (
         <>
+            <CustomModal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                content={CreateMockExam()}
+                title="Criar um Simulado"
+            />
             <Header />
             <Container>
                 <Sidebar />
@@ -76,6 +90,9 @@ const MockExams = () => {
                     <Content>
                         <span className="title-wrapper">
                             <h2 className="title">Simulados</h2>
+                            <button className="button" onClick={openModal}>
+                                Iniciar Simulado
+                            </button>
                         </span>
                         <Cards>
                             {mockExams.map((mockExam) => (
