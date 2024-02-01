@@ -61,7 +61,7 @@ const CreateMockExam = () => {
                                     className="label-inline"
                                     htmlFor="Disciplinas"
                                 >
-                                    Quantidade:{" "}
+                                    Disciplina:{" "}
                                 </label>
                                 <input
                                     // {...register("email")}
