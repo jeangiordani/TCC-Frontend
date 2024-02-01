@@ -59,13 +59,13 @@ const CreateMockExam = () => {
                             <div className="inline-wrapper">
                                 <label
                                     className="label-inline"
-                                    htmlFor="quantidade"
+                                    htmlFor="Disciplinas"
                                 >
                                     Quantidade:{" "}
                                 </label>
                                 <input
                                     // {...register("email")}
-                                    id="quantidade"
+                                    id="disciplinas"
                                     className={`input-select`}
                                     // className={`input ${
                                     //     errors.email?.message ? "error-input" : ""
