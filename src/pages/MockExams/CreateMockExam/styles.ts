@@ -51,6 +51,13 @@ export const Form = styled.form`
 
         .long-text {
             height: 90px;
+            max-width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .long-text::placeholder {
+            /* padding: 10px 0; */
         }
 
         .input::placeholder {
@@ -122,10 +129,10 @@ export const Form = styled.form`
         }
     }
     .button-wrapper {
-        display: flex;
-        width: 100%;
-        justify-content: flex-end;
-        align-items: flex-end;
+        padding: 20px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
 
         .button {
             width: 100px;

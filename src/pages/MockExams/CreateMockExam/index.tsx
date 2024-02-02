@@ -1,46 +1,66 @@
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import { Container, Form } from "./styles";
+import { mockExamSchema } from "../../../validations/mockExam";
+
+type IFormInputs = yup.InferType<typeof mockExamSchema>;
 
 const options = [
-    { value: 1, label: "Mátematica" },
-    { value: 2, label: "Literatura" },
-    { value: 3, label: "Português" },
+    { id: 1, label: "Mátematica" },
+    { id: 2, label: "Literatura" },
+    { id: 3, label: "Português" },
 ];
 
 const CreateMockExam = () => {
+    const [selectedOption, setSelectedOption] = React.useState<number>(0);
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm<IFormInputs>({
+        resolver: yupResolver(mockExamSchema),
+    });
+
+    const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+        data.disciplineId = selectedOption;
+        console.log(data);
+    };
     return (
         <>
             <Container>
-                <Form>
+                <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
                         <label className="label" htmlFor="nome">
                             Nome
                         </label>
                         <input
-                            // {...register("email")}
+                            {...register("name")}
                             id="nome"
-                            className={`input`}
-                            // className={`input ${
-                            //     errors.email?.message ? "error-input" : ""
-                            // }`}
+                            className={`input ${
+                                errors.name?.message ? "error-input" : ""
+                            }`}
                             placeholder="Digite o nome do simulado"
                         />
-                        {/* <div className="error">{errors.name?.message}</div> */}
+                        <div className="error">{errors.name?.message}</div>
                     </div>
                     <div className="input-wrapper">
                         <label className="label" htmlFor="descricao">
                             Descrição
                         </label>
-                        <input
-                            // {...register("email")}
+                        <textarea
+                            {...register("description")}
                             id="descricao"
-                            className={`input long-text`}
-                            // className={`input ${
-                            //     errors.email?.message ? "error-input" : ""
-                            // }`}
+                            className={`input long-text${
+                                errors.description?.message ? "error-input" : ""
+                            }`}
                             placeholder="Digite a descrição do simulado"
                         />
-                        {/* <div className="error">{errors.name?.message}</div> */}
+                        <div className="error">
+                            {errors.description?.message}
+                        </div>
                     </div>
 
                     <div className="input-wrapper">
@@ -53,14 +73,19 @@ const CreateMockExam = () => {
                                     Quantidade:{" "}
                                 </label>
                                 <input
-                                    // {...register("email")}
+                                    type="number"
+                                    {...register("quantity")}
                                     id="quantidade"
-                                    className={`input-quantity`}
-                                    // className={`input ${
-                                    //     errors.email?.message ? "error-input" : ""
-                                    // }`}
+                                    className={`input-quantity ${
+                                        errors.quantity?.message
+                                            ? "error-input"
+                                            : ""
+                                    }`}
+                                    defaultValue={1}
                                 />
-                                {/* <div className="error">{errors.name?.message}</div> */}
+                                <div className="error">
+                                    {errors.quantity?.message}
+                                </div>
                             </div>
                             <div className="inline-wrapper">
                                 <label
@@ -74,13 +99,16 @@ const CreateMockExam = () => {
                                     name="disciplinas"
                                     id="disciplinas"
                                     className="input-quantity"
-                                    defaultValue={0}
+                                    defaultValue={selectedOption}
+                                    onChange={(e) =>
+                                        setSelectedOption(+e.target.value)
+                                    }
                                 >
                                     <option value={0}>Aleatório</option>
                                     {options.map((option) => (
                                         <option
-                                            key={option.value}
-                                            value={option.value}
+                                            key={option.id}
+                                            value={option.id}
                                         >
                                             {option.label}
                                         </option>

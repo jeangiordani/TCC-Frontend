@@ -80,7 +80,7 @@ const MockExams = () => {
             <CustomModal
                 isOpen={isOpen}
                 closeModal={closeModal}
-                content={CreateMockExam()}
+                Content={CreateMockExam}
                 title="Criar um Simulado"
             />
             <Header />

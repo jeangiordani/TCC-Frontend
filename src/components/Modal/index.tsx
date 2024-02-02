@@ -6,14 +6,14 @@ Modal.setAppElement("#root");
 interface CustomModalProps {
     isOpen: boolean;
     closeModal: () => void;
-    content: JSX.Element;
+    Content: React.ComponentType;
     title: string;
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
     isOpen,
     closeModal,
-    content,
+    Content,
     title,
 }) => {
     return (
@@ -72,7 +72,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     X
                 </div>
             </div>
-            {content}
+            <Content />
         </Modal>
     );
 };
