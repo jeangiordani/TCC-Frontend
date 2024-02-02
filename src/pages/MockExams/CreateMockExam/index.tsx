@@ -114,8 +114,6 @@ const CreateMockExam = () => {
                                         </option>
                                     ))}
                                 </select>
-
-                                {/* <div className="error">{errors.name?.message}</div> */}
                             </div>
                         </div>
                     </div>
