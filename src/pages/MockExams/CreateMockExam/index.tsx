@@ -1,6 +1,12 @@
 import React from "react";
 import { Container, Form } from "./styles";
 
+const options = [
+    { value: 1, label: "Mátematica" },
+    { value: 2, label: "Literatura" },
+    { value: 3, label: "Português" },
+];
+
 const CreateMockExam = () => {
     return (
         <>
@@ -59,21 +65,38 @@ const CreateMockExam = () => {
                             <div className="inline-wrapper">
                                 <label
                                     className="label-inline"
-                                    htmlFor="Disciplinas"
+                                    htmlFor="disciplinas"
                                 >
                                     Disciplina:{" "}
                                 </label>
-                                <input
-                                    // {...register("email")}
+
+                                <select
+                                    name="disciplinas"
                                     id="disciplinas"
-                                    className={`input-select`}
-                                    // className={`input ${
-                                    //     errors.email?.message ? "error-input" : ""
-                                    // }`}
-                                />
+                                    className="input-quantity"
+                                    defaultValue={0}
+                                >
+                                    <option value={0}>Aleatório</option>
+                                    {options.map((option) => (
+                                        <option
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+
                                 {/* <div className="error">{errors.name?.message}</div> */}
                             </div>
                         </div>
+                    </div>
+                    <div className="button-wrapper">
+                        <input
+                            type="submit"
+                            className="button"
+                            value="Iniciar"
+                        />
                     </div>
                 </Form>
             </Container>

@@ -22,6 +22,9 @@ const GlobalStyle = createGlobalStyle`
   scrollbar-color: #A1A1A1 #EBEBEB;
   }
 
+  html, body { height: 100%; width: 100%; margin: 0; }
+
+
   *::-webkit-scrollbar {
   height: 5px;
   width: 5px;

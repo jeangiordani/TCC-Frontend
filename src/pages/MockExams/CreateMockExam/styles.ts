@@ -14,6 +14,7 @@ export const Form = styled.form`
 
     flex-direction: column;
     align-items: center;
+    /* overflow: hidden; */
 
     .error {
         font-family: "Roboto-Bold";
@@ -72,22 +73,6 @@ export const Form = styled.form`
             text-decoration: none;
         }
 
-        .button {
-            height: 45px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-family: "Roboto-Bold";
-            border: none;
-            color: white;
-            background-color: var(--primary);
-            font-size: 1rem;
-        }
-
-        .button:hover {
-            opacity: 0.8;
-            cursor: pointer;
-        }
-
         .error-input {
             border: 1px solid red;
         }
@@ -110,7 +95,8 @@ export const Form = styled.form`
             }
 
             .input-quantity {
-                min-width: 25%;
+                min-width: 30%;
+                max-width: 100px;
                 border: 1px solid rgba(0, 0, 0, 0.1);
                 height: 30px;
                 border-radius: 5px;
@@ -121,17 +107,40 @@ export const Form = styled.form`
                 padding-left: 10px;
             }
 
-            .input-select {
-                min-width: 50%;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                height: 30px;
-                border-radius: 5px;
-
-                color: rgba(0, 0, 0, 0.7);
+            .input-quantity::placeholder {
                 font-family: "Roboto-Regular";
+                color: black;
+                opacity: 0.3;
                 font-size: 1rem;
-                padding-left: 10px;
             }
+
+            .input-quantity:focus {
+                border: 1px solid var(--secondary);
+                outline: none;
+                background-color: rgba(0, 0, 0, 0.02);
+            }
+        }
+    }
+    .button-wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        .button {
+            width: 100px;
+            height: 45px;
+            border-radius: 5px;
+            font-family: "Roboto-Bold";
+            border: none;
+            color: white;
+            background-color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+            cursor: pointer;
         }
     }
 `;
