@@ -23,9 +23,10 @@ const GlobalStyle = createGlobalStyle`
   scrollbar-color: #A1A1A1 #EBEBEB;
   }
 
-body { min-height: 100vh; width: 100%; margin: 0; display: flex;
-  flex-direction: column;
-  min-height: 100vh; }
+  html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}
 
 
   *::-webkit-scrollbar {

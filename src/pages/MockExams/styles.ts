@@ -87,13 +87,13 @@ export const Card = styled.div<{ $completed: boolean }>`
     width: 200px;
     height: 230px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
     margin-right: 30px;
     margin-bottom: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 
     -webkit-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
     -moz-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
