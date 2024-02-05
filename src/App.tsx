@@ -9,6 +9,7 @@ import { Login } from "./pages/Login";
 import Register from "./pages/Register";
 import MockExams from "./pages/MockExams";
 import Profile from "./pages/Profile";
+import Questions from "./pages/Questions";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -22,7 +23,9 @@ const GlobalStyle = createGlobalStyle`
   scrollbar-color: #A1A1A1 #EBEBEB;
   }
 
-  html, body { height: 100%; width: 100%; margin: 0; }
+body { min-height: 100vh; width: 100%; margin: 0; display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
 
 
   *::-webkit-scrollbar {
@@ -93,6 +96,10 @@ const App = () => {
                     <Route path="/cadastrar" element={<Register />} />
                     <Route path="/simulados" element={<MockExams />} />
                     <Route path="/perfil" element={<Profile />} />
+                    <Route
+                        path="/simulados/:id/questao"
+                        element={<Questions />}
+                    />
                 </Routes>
             </BrowserRouter>
         </>

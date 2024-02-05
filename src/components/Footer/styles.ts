@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Footer = styled.footer`
     border-top: 1px solid var(--secondary);
@@ -6,10 +6,10 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    min-height: 50px;
 
     div {
-        font-family: 'Roboto-Regular';
+        font-family: "Roboto-Regular";
         font-size: 0.8rem;
         font-weight: 600;
         color: black;

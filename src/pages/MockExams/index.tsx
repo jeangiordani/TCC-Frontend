@@ -126,7 +126,7 @@ const MockExams = () => {
                                                 </h3>
                                             </div>
                                             <Link
-                                                to={`/simulados/${mockExam.id}`}
+                                                to={`/simulados/${mockExam.id}/questao`}
                                             >
                                                 <button className="button">
                                                     Ver
