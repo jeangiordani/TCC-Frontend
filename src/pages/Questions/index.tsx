@@ -4,11 +4,11 @@ import { BackButton } from "../../components/BackButton";
 import { Container, QuestionContainer } from "./styles";
 
 const options = [
-    { id: 1, value: 2 },
-    { id: 2, value: 3 },
-    { id: 3, value: 6 },
-    { id: 4, value: 12 },
-    { id: 5, value: 24 },
+    { id: "1", value: "2" },
+    { id: "2", value: "3" },
+    { id: "3", value: "6" },
+    { id: "4", value: "12" },
+    { id: "5", value: "24" },
 ];
 
 const Questions = () => {
