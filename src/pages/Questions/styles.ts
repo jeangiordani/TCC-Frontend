@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/breakpoints";
 
 export const Container = styled.div`
     display: flex;
@@ -76,6 +77,71 @@ export const QuestionContainer = styled.div`
             &:hover {
                 background-color: rgba(0, 0, 0, 0.1);
             }
+        }
+    }
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+
+    .center-button {
+        display: flex;
+        align-items: center;
+        .button {
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 120px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            font-family: "Roboto-Bold", sans-serif;
+            color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .prev::before {
+            content: "<";
+        }
+
+        .next::after {
+            content: ">";
+        }
+    }
+
+    .comments-button {
+        display: flex;
+        align-items: center;
+
+        .comments {
+            border: none;
+            cursor: pointer;
+            font-family: "Roboto-Bold", sans-serif;
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 0.9rem;
+            width: 120px;
+            margin: 0 5px;
+        }
+
+        .answer-button {
+            width: 120px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            font-family: "Roboto-Bold", sans-serif;
+            color: white;
+            border-radius: 5px;
+            margin: 0 5px;
+            background-color: var(--primary);
+        }
+    }
+    @media ${device.md} {
+        flex-direction: column;
+
+        .comments-button {
+            margin: 10px;
         }
     }
 `;
