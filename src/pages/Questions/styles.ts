@@ -78,6 +78,9 @@ export const QuestionContainer = styled.div`
                 background-color: rgba(0, 0, 0, 0.1);
             }
         }
+        .option::after {
+            content: "asas";
+        }
     }
 `;
 
@@ -112,7 +115,7 @@ export const ButtonContainer = styled.div`
         }
 
         .disabled {
-            background-color: rgba(0, 0, 0, 0.15);
+            opacity: 0.7;
             cursor: not-allowed;
         }
     }

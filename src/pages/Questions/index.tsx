@@ -125,7 +125,12 @@ const Questions = () => {
                     </div>
                     <div className="comments-button">
                         <div className="comments">Comentários (2)</div>
-                        <button className="answer-button">Responder</button>
+                        <button
+                            className="answer-button"
+                            onClick={() => console.log(selectedOption)}
+                        >
+                            Responder
+                        </button>
                     </div>
                 </ButtonContainer>
             </Container>
