@@ -90,6 +90,7 @@ export const ButtonContainer = styled.div`
     .center-button {
         display: flex;
         align-items: center;
+
         .button {
             background-color: rgba(0, 0, 0, 0.1);
             width: 120px;
@@ -108,6 +109,11 @@ export const ButtonContainer = styled.div`
 
         .next::after {
             content: ">";
+        }
+
+        .disabled {
+            background-color: rgba(0, 0, 0, 0.15);
+            cursor: not-allowed;
         }
     }
 

@@ -108,7 +108,7 @@ const Questions = () => {
                     <div className="center-button">
                         <button
                             className={
-                                "prev button" + (isFirstQuestion && "disabled")
+                                "prev button " + (isFirstQuestion && "disabled")
                             }
                             onClick={() => handlePrevQuestion()}
                         >
