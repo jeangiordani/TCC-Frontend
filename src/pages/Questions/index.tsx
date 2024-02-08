@@ -2,6 +2,8 @@ import React from "react";
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ButtonContainer, Container, QuestionContainer } from "./styles";
+import CustomModal from "../../components/Modal";
+import Comments from "./Comments";
 
 type Question = {
     id: string;
@@ -48,6 +50,10 @@ const Questions = () => {
     const [questions, setQuestions] = React.useState(questionsPayload);
     const [isLastQuestion, setIsLastQuestion] = React.useState<boolean>();
     const [isFirstQuestion, setIsFirstQuestion] = React.useState<boolean>();
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
 
     React.useEffect(() => {
         setIsLastQuestion(currentQuestion === questions.length - 1);
@@ -70,6 +76,12 @@ const Questions = () => {
 
     return (
         <>
+            <CustomModal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                Content={() => <Comments questionId={"1"} />}
+                title="Comentários"
+            />
             <Header />
             <BackButton />
             <Container>
@@ -124,7 +136,9 @@ const Questions = () => {
                         </button>
                     </div>
                     <div className="comments-button">
-                        <div className="comments">Comentários (2)</div>
+                        <div className="comments" onClick={openModal}>
+                            Comentários (2)
+                        </div>
                         <button
                             className="answer-button"
                             onClick={() => console.log(selectedOption)}
