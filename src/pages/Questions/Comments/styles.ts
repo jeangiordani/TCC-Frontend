@@ -13,12 +13,12 @@ export const CommentsContainer = styled.div<{ $formVisible?: boolean }>`
     width: 95%;
     align-items: center;
     margin-top: 20px;
-    height: 100%;
 
     .comments {
         width: 100%;
         display: flex;
         flex-direction: column;
+        flex: 1;
 
         .comment {
             display: flex;
