@@ -51,6 +51,8 @@ const Questions = () => {
     const [isLastQuestion, setIsLastQuestion] = React.useState<boolean>();
     const [isFirstQuestion, setIsFirstQuestion] = React.useState<boolean>();
     const [isOpen, setIsOpen] = React.useState(false);
+    const [currentQuestionId, setCurrentQuestionId] =
+        React.useState<string>("");
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -58,6 +60,7 @@ const Questions = () => {
     React.useEffect(() => {
         setIsLastQuestion(currentQuestion === questions.length - 1);
         setIsFirstQuestion(currentQuestion === 0);
+        setCurrentQuestionId(questions[currentQuestion].id);
     }, [currentQuestion, questions]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +82,7 @@ const Questions = () => {
             <CustomModal
                 isOpen={isOpen}
                 closeModal={closeModal}
-                Content={() => <Comments questionId={"1"} />}
+                Content={() => <Comments questionId={currentQuestionId} />}
                 title="Comentários"
             />
             <Header />
