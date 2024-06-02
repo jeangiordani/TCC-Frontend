@@ -5,11 +5,13 @@ import { StyledHeader, Container, AuthButton } from "./styles";
 import logo from "../../assets/icons/logo-png.svg";
 import profile from "../../assets/icons/profile-round-1346-svgrepo-com.svg";
 import exam from "../../assets/icons/exam-svgrepo-com.svg";
-import userImage from "../../assets/images/user.png";
+import { useAuth } from "../../context/auth";
+// import userImage from "../../assets/images/user.png";
 // import userNoImage from "../../assets/images/user-no-picture.png";
 
 export const Header = () => {
-    const [isAuth, setIsAuth] = React.useState<boolean>(false);
+    const { signed, user } = useAuth();
+    const [isAuth, setIsAuth] = React.useState<boolean>(signed);
     return (
         <Container>
             <StyledHeader>
@@ -17,7 +19,7 @@ export const Header = () => {
                     <img src={logo} alt="Logo" className="logo svg-color" />
                 </NavLink>
 
-                {isAuth ? (
+                {signed ? (
                     <ul>
                         <li>
                             <NavLink to="/perfil">
@@ -29,7 +31,7 @@ export const Header = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/simulado">
+                            <NavLink to="/simulados">
                                 <img
                                     src={exam}
                                     alt="Exams"
@@ -39,14 +41,14 @@ export const Header = () => {
                         </li>
                         <li>
                             <div className="user">
-                                <img
+                                {/* <img
                                     src={userImage}
                                     alt="photo"
                                     className="user-photo"
-                                />
+                                /> */}
                                 <div className="user-info">
-                                    <div className="name">João da Silva</div>
-                                    <div className="role">Estudante</div>
+                                    <div className="name">{user.name}</div>
+                                    <div className="role">{user.role != "PROFESSOR" ? "Estudante" : "Professor"}</div>
                                 </div>
                             </div>
                         </li>

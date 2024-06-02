@@ -1,81 +1,117 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ButtonContainer, Container, QuestionContainer } from "./styles";
 import CustomModal from "../../components/Modal";
 import Comments from "./Comments";
+import { useFetch } from "../../hooks/useFetch";
+import { useAnswerQuestion } from "../../hooks/useAnswerQuestion";
+
+type Alternative = {
+    id: string;
+    letter: string;
+    description: string;
+    correct: boolean;
+};
+
+type Answer = {
+    id: number;
+    correct: boolean;
+    alternativeId: string;
+};   
 
 type Question = {
     id: string;
     statement: string;
-    preStatement?: string;
-    options: Array<{ id: string; value: number }>;
+    postStatement?: string;
+    alternatives: Array<Alternative>;
+    answer: Answer;
+    image: string;
 };
 
-const questionsPayload: Question[] = [
-    {
-        id: "1",
-        statement:
-            "Uma cozinheira produz docinhos especiais por encomenda. Usando uma receita-base de massa, ela prepara uma porção, com a qual produz 50 docinhos maciços de formato esférico, com 2 cm de diâmetro. Um cliente encomenda 150 desses docinhos, mas pede que cada um tenha formato esférico com 4 cm de diâmetro. A cozinheira pretende preparar o número exato de porções da receita-base de massa necessário para produzir os docinhos dessa encomenda.",
-        preStatement:
-            "Quantas porções da receita-base de massa ela deve preparar para atender esse cliente?",
-        options: [
-            { id: "1", value: 2 },
-            { id: "2", value: 3 },
-            { id: "3", value: 6 },
-            { id: "4", value: 12 },
-            { id: "5", value: 24 },
-        ],
-    },
-    {
-        id: "2",
-        statement:
-            "Em um concurso de beleza, a vencedora foi escolhida por meio de votação. Cada jurado podia votar em uma das três candidatas. A candidata vencedora recebeu 50% dos votos, a segunda colocada recebeu 30% e a terceira, 20%. O número de jurados que votaram na candidata vencedora foi igual a 3/4 do número de jurados que votaram na segunda colocada. O número de jurados que votaram na terceira colocada foi igual a 2/3 do número de jurados que votaram na segunda colocada. O número total de jurados que votaram na candidata vencedora foi igual a 60.",
-        preStatement: "Quantos jurados votaram na segunda colocada?",
-        options: [
-            { id: "1", value: 20 },
-            { id: "2", value: 30 },
-            { id: "3", value: 40 },
-            { id: "4", value: 50 },
-            { id: "5", value: 60 },
-        ],
-    },
-];
-
 const Questions = () => {
-    const [selectedOption, setSelectedOption] = React.useState<number | null>(
-        null,
-    );
+    const { id } = useParams<{ id: string }>();
+    
+    const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
     const [currentQuestion, setCurrentQuestion] = React.useState<number>(0);
-    const [questions, setQuestions] = React.useState(questionsPayload);
-    const [isLastQuestion, setIsLastQuestion] = React.useState<boolean>();
-    const [isFirstQuestion, setIsFirstQuestion] = React.useState<boolean>();
+    const [questions, setQuestions] = React.useState<Question[]>([]);
+    const [isLastQuestion, setIsLastQuestion] = React.useState<boolean>(false);
+    const [isFirstQuestion, setIsFirstQuestion] = React.useState<boolean>(true);
     const [isOpen, setIsOpen] = React.useState(false);
-    const [currentQuestionId, setCurrentQuestionId] =
-        React.useState<string>("");
+    const [currentQuestionId, setCurrentQuestionId] = React.useState<string>("");
+    
+    const { data, loading, error, refetch } = useFetch("/mock-exams/" + id);
+    const { answerQuestion, loading: loadingAnswer } = useAnswerQuestion();
+    
+    
+    React.useEffect(() => {
+        if (data && data.questions) {
+            const newQuestions = data.questions.map((question: any) => {
+                const alternatives = question.alternatives.map((alternative: any) => ({
+                    id: alternative.id,
+                    letter: alternative.letter,
+                    description: alternative.description,
+                    correct: alternative.is_correct,
+                }));
 
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+                return {
+                    id: question.id,
+                    statement: question.statement,
+                    postStatement: question.post_statement,
+                    alternatives,
+                    answer: {
+                        id: question.answer.id,
+                        correct: question.answer.is_correct,
+                        alternativeId: question.answer.alternative_id,
+                    },
+                    image: question.image,
+                };
+            });
+            setQuestions(newQuestions);
+            console.log(newQuestions);
+            
+        }
+    }, [data, loadingAnswer]);
+
 
     React.useEffect(() => {
         setIsLastQuestion(currentQuestion === questions.length - 1);
         setIsFirstQuestion(currentQuestion === 0);
-        setCurrentQuestionId(questions[currentQuestion].id);
+        if (questions[currentQuestion]) {
+            setCurrentQuestionId(questions[currentQuestion].id);
+        }
     }, [currentQuestion, questions]);
 
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedOption(Number(event.target.value));
+        setSelectedOption(event.target.value);
     };
-
+    
     const handleNextQuestion = () => {
-        if (isLastQuestion) return;
-        setCurrentQuestion((prev) => prev + 1);
+        if (!isLastQuestion) {
+            setCurrentQuestion((prev) => prev + 1);
+        }
+    };
+    
+    const handlePrevQuestion = () => {
+        if (!isFirstQuestion) {
+            setCurrentQuestion((prev) => prev - 1);
+        }
     };
 
-    const handlePrevQuestion = () => {
-        if (isFirstQuestion) return;
-        setCurrentQuestion((prev) => prev - 1);
+    const handleAnswer = async (mockExamId: string | undefined, alternativeId: string | null) => {
+        if (alternativeId) {
+            await answerQuestion(mockExamId+"", alternativeId);
+            refetch();
+            
+        }
     };
+
+    const currentQuestionData = questions[currentQuestion];
 
     return (
         <>
@@ -88,52 +124,59 @@ const Questions = () => {
             <Header />
             <BackButton />
             <Container>
-                <QuestionContainer>
-                    {currentQuestion < questions.length && (
+                {loading ? (
+                    <p>Loading...</p>
+                ) : error ? (
+                    <p>Error loading data</p>
+                ) : currentQuestionData ? (
+                    <QuestionContainer>
                         <div className="statement">
                             <h1 className="question-title">
                                 Questão {currentQuestion + 1}
                             </h1>
-                            <p className="question-text">
-                                {questions[currentQuestion].statement}
+                            <p style={{whiteSpace: "pre-wrap"}} className="question-text">
+                                {currentQuestionData.statement}
                             </p>
-                            <div className="question-text">
-                                {questions[currentQuestion].preStatement}
+                            {currentQuestionData.image != null && <img className="question-image" src={currentQuestionData.image} />}
+                            <div style={{whiteSpace: "pre-wrap"}} className="question-text">
+                                {currentQuestionData.postStatement}
                             </div>
                         </div>
-                    )}
-                    <form className="options">
-                        {questions[currentQuestion].options.map((option) => (
-                            <div className="option" key={option.id}>
-                                <input
-                                    type="radio"
-                                    value={option.value}
-                                    checked={selectedOption === option.value}
-                                    id={option.value + ""}
-                                    onChange={handleChange}
-                                />
-                                <label htmlFor={option.value + ""}>
-                                    {option.value}
-                                </label>
-                            </div>
-                        ))}
-                    </form>
-                </QuestionContainer>
+                        <form className="options">
+                            {currentQuestionData.alternatives.map((option) => (
+                                <div className={"option " + 
+                                (currentQuestionData.answer.alternativeId == option.id ? (currentQuestionData.answer.correct ? "right" : "wrong") : "") + " " +
+                                (currentQuestionData.answer.alternativeId != null ? (option.correct == true ? "right" : "") : "")
+                                } key={option.id}>
+
+                                    <input
+                                        type="radio"
+                                        value={option.id}
+                                        checked={currentQuestionData.answer.alternativeId == null ? selectedOption == option.id : currentQuestionData.answer.alternativeId == option.id}
+                                        id={option.id}
+                                        onChange={handleChange}
+                                    />
+
+                                    <label htmlFor={option.id}>
+                                        <div style={{marginRight: "5px", fontWeight: "bold"}}>{option.letter})</div>
+                                        {option.description}
+                                    </label>
+                                </div>
+                            ))}
+                        </form>
+                    </QuestionContainer>
+                ) : null}
                 <ButtonContainer>
                     <div className="center-button">
                         <button
-                            className={
-                                "prev button " + (isFirstQuestion && "disabled")
-                            }
-                            onClick={() => handlePrevQuestion()}
+                            className={`prev button ${isFirstQuestion ? "disabled" : ""}`}
+                            onClick={handlePrevQuestion}
                         >
                             Anterior
                         </button>
                         <button
-                            className={
-                                "next button " + (isLastQuestion && "disabled")
-                            }
-                            onClick={() => handleNextQuestion()}
+                            className={`next button ${isLastQuestion ? "disabled" : ""}`}
+                            onClick={handleNextQuestion}
                         >
                             Próximo
                         </button>
@@ -142,12 +185,18 @@ const Questions = () => {
                         <div className="comments" onClick={openModal}>
                             Comentários (2)
                         </div>
-                        <button
-                            className="answer-button"
-                            onClick={() => console.log(selectedOption)}
-                        >
-                            Responder
-                        </button>
+                        {currentQuestionData && (  
+                            currentQuestionData.answer.alternativeId == null ? (
+                                <button
+                                className="answer-button"
+                                onClick={() => handleAnswer(currentQuestionData.answer.id+"", selectedOption)}
+                            >
+                            {loadingAnswer ? "Respondendo..." : "Responder"}
+                            </button>
+                            ) : (
+                                <div></div>
+                            )
+                        )}
                     </div>
                 </ButtonContainer>
             </Container>

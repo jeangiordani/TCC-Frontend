@@ -10,70 +10,46 @@ import CreateMockExam from "./CreateMockExam";
 
 import mockExamIcon from "../../assets/icons/file-done-svgrepo-com.svg";
 import checkmark from "../../assets/icons/done-1478-svgrepo-com.svg";
+import { useFetch } from "../../hooks/useFetch";
 
 interface MockExamProps {
-    id: number;
-    name: string;
-    progress: number;
+    id: string;
+    title: string;
     isCompleted: boolean;
+    progress: number;
 }
-
-const mockExams: MockExamProps[] = [
-    {
-        id: 1,
-        name: "Meu primeiro simulado",
-        progress: 100,
-        isCompleted: true,
-    },
-    {
-        id: 2,
-        name: "Meu segundo simulado",
-        progress: 50,
-        isCompleted: false,
-    },
-    {
-        id: 3,
-        name: "Meu terceiro simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-    {
-        id: 4,
-        name: "Meu quarto simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-    {
-        id: 5,
-        name: "Meu quinto simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-    {
-        id: 6,
-        name: "Meu sexto simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-    {
-        id: 7,
-        name: "Meu sétimo simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-    {
-        id: 8,
-        name: "Meu oitavo simulado",
-        progress: 0,
-        isCompleted: false,
-    },
-];
 
 const MockExams = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
+    const [mockExams, setMockExams] = React.useState<MockExamProps[]>([]);
+
+    const { data, loading, error, refetch } = useFetch("/mock-exams");
+
+    React.useEffect(() => {
+        if (data) {
+            const newMockExams = data.data.map((mockExam: any) => {
+                const progress = Math.floor(
+                    (mockExam.qty_answered / mockExam.qty_questions) * 100
+                );
+                return {
+                    id: mockExam.id,
+                    title: mockExam.title,
+                    isCompleted: mockExam.qty_answered === mockExam.qty_questions,
+                    progress,
+                };
+            });
+            setMockExams(newMockExams);
+        }
+    }, [data]);
+    
+    
+
     const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const closeModal = () => {
+        setIsOpen(false);
+        refetch();
+    };
 
     return (
         <>
@@ -114,7 +90,7 @@ const MockExams = () => {
                                             className="card-icon"
                                         />
                                         <div className="card-title">
-                                            {mockExam.name}
+                                            {mockExam.title}
                                         </div>
                                         <div className="card-info">
                                             <div className="card-progress">

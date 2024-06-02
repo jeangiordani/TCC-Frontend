@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import MockExams from "./pages/MockExams";
 import Profile from "./pages/Profile";
 import Questions from "./pages/Questions";
+import { ProtectedRoutes, PublicRoutes } from "./routes";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -93,14 +94,22 @@ const App = () => {
                 <GlobalStyle />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/cadastrar" element={<Register />} />
-                    <Route path="/simulados" element={<MockExams />} />
-                    <Route path="/perfil" element={<Profile />} />
-                    <Route
-                        path="/simulados/:id/questao"
-                        element={<Questions />}
-                    />
+
+                    <Route element={<PublicRoutes/>}>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/cadastrar" element={<Register />} />
+                    
+
+                    </Route>
+                    
+                    <Route element={<ProtectedRoutes/>}>
+                      <Route path="/simulados" element={<MockExams />} />
+                      <Route path="/perfil" element={<Profile />} />
+                      <Route
+                          path="/simulados/:id/questao"
+                          element={<Questions />}
+                      />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </>

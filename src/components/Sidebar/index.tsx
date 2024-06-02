@@ -5,8 +5,11 @@ import { NavLink } from "react-router-dom";
 import mockExamIcon from "../../assets/icons/exam-svgrepo-com.svg";
 import profileIcon from "../../assets/icons/profile-round-1346-svgrepo-com.svg";
 import dashboardIcon from "../../assets/icons/dashboard-alt-svgrepo-com.svg";
+import { useAuth } from "../../context/auth";
 
 export const Sidebar = () => {
+    const { user } = useAuth();
+
     return (
         <StyledSidebar>
             <BackButton />
@@ -24,10 +27,12 @@ export const Sidebar = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to="/dashboard" className="link">
-                        <img src={dashboardIcon} alt="" className="icon" />
-                        Dashboard
-                    </NavLink>
+                    {user.role === "ADMIN" && ( 
+                        <a href="http://localhost:8000/admin/login" target="_blank" className="link">
+                            <img src={dashboardIcon} alt="" className="icon" />
+                            Dashboard
+                        </a>
+                    )}
                 </li>
             </ul>
         </StyledSidebar>

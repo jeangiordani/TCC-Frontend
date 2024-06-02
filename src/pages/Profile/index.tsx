@@ -6,9 +6,17 @@ import { Sidebar } from "../../components/Sidebar";
 
 import userImage from "../../assets/images/profile-picture.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 // import userNoImage from "../../assets/images/user-no-picture.png";
 
 const Profile = () => {
+    const { signed, user, logout } = useAuth();
+    
+
+    const handleLogout = () => {
+        logout();
+    }
+
     return (
         <>
             <Header />
@@ -22,18 +30,18 @@ const Profile = () => {
 
                         <div className="profile-area">
                             <div className="commom-info">
-                                <img
+                                {/* <img
                                     src={userImage}
                                     alt=""
                                     className="profile-picture"
-                                />
-                                <div className="user-name">João da Silva</div>
-                                <div className="user-role">Estudante</div>
+                                /> */}
+                                <div className="user-name">{user.name}</div>
+                                <div className="user-role">{user.role != "PROFESSOR" ? "Estudante" : "Professor"}</div>
                             </div>
 
                             <div className="profile-info">
                                 <div className="email-wrapper">
-                                    Email: <span>joao.silva@email.com</span>
+                                    Email: <span>{user.email}</span>
                                 </div>
                                 <div className="performance">
                                     Desempenho:
@@ -44,9 +52,9 @@ const Profile = () => {
                                         Pior disciplina: Literatura
                                     </div>
                                 </div>
-                                <Link to="/perfil/editar" className="link">
-                                    <button className="button">Editar</button>
-                                </Link>
+                                <div className="link">
+                                    <button className="button" onClick={()=> handleLogout()}>Sair</button>
+                                </div>
                             </div>
                         </div>
                     </Content>

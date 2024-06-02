@@ -5,16 +5,20 @@ import * as yup from "yup";
 
 import { Container, Form } from "./styles";
 import { mockExamSchema } from "../../../validations/mockExam";
+import { useFetch } from "../../../hooks/useFetch";
+import { usePost } from "../../../hooks/usePost";
+import { useAuth } from "../../../context/auth";
 
 type IFormInputs = yup.InferType<typeof mockExamSchema>;
-
-const options = [
-    { id: 1, label: "Mátematica" },
-    { id: 2, label: "Literatura" },
-    { id: 3, label: "Português" },
-];
+type Option = {
+    id: number;
+    name: string;
+};
 
 const CreateMockExam = () => {
+    const { user } = useAuth();
+    const [options, setOptions] = React.useState<Option[]>([]);
+    const {data} = useFetch("/knowledge-areas");
     const [selectedOption, setSelectedOption] = React.useState<number>(0);
     const {
         register,
@@ -23,10 +27,23 @@ const CreateMockExam = () => {
     } = useForm<IFormInputs>({
         resolver: yupResolver(mockExamSchema),
     });
+    const {postData, loading: loadingPost} = usePost();
 
-    const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    React.useEffect(() => {
+        if (data) {
+            setOptions(data);
+        }
+    }, [data]);
+
+    const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
         data.disciplineId = selectedOption;
-        console.log(data);
+        await postData("/mock-exams", {
+            title: data.name,
+            description: data.description,
+            qty_questions: data.quantity,
+            user_id: user.id,
+            knowledge_area_id: data.disciplineId,
+        });
     };
     return (
         <>
@@ -104,13 +121,13 @@ const CreateMockExam = () => {
                                         setSelectedOption(+e.target.value)
                                     }
                                 >
-                                    <option value={0}>Aleatório</option>
+                                    <option value={null}>Aleatório</option>
                                     {options.map((option) => (
                                         <option
                                             key={option.id}
                                             value={option.id}
                                         >
-                                            {option.label}
+                                            {option.name}
                                         </option>
                                     ))}
                                 </select>
@@ -121,7 +138,8 @@ const CreateMockExam = () => {
                         <input
                             type="submit"
                             className="button"
-                            value="Iniciar"
+                            value={loadingPost ? "Enviando..." : "Iniciar"}
+                            disabled={loadingPost}
                         />
                     </div>
                 </Form>

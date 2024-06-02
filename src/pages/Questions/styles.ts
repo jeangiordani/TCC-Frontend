@@ -30,6 +30,8 @@ export const QuestionContainer = styled.div`
         display: flex;
         flex-direction: column;
         padding: 10px;
+        height: 100%;
+
         .question-title {
             font-family: "Roboto-Bold", sans-serif;
             opacity: 0.5;
@@ -43,6 +45,13 @@ export const QuestionContainer = styled.div`
             margin-bottom: 10px;
             color: var(--primary);
             font-weight: 600;
+        }
+
+        .question-image {
+            max-width: 80%;
+            max-height: 100%;
+            margin-bottom: 20px;
+            margin: 0 auto;
         }
     }
 
@@ -65,7 +74,6 @@ export const QuestionContainer = styled.div`
                 width: 100%;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
                 cursor: pointer;
                 transition: all 0.2s;
                 margin-left: 10px;
@@ -78,9 +86,14 @@ export const QuestionContainer = styled.div`
                 background-color: rgba(0, 0, 0, 0.1);
             }
         }
-        .option::after {
-            content: "asas";
+        .right {
+            background-color: rgba(0, 255, 0, 0.1);
         }
+
+        .wrong {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
     }
 `;
 

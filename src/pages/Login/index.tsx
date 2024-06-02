@@ -8,10 +8,12 @@ import { Container, Form } from "./styles";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../../validations/login";
 import { BackButton } from "../../components/BackButton";
+import { useAuth } from "../../context/auth";
 
 type IFormInputs = yup.InferType<typeof loginSchema>;
 
 export const Login = () => {
+    const { login } = useAuth();
     const {
         register,
         formState: { errors },
@@ -21,7 +23,7 @@ export const Login = () => {
     });
 
     const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-        console.log(data);
+        login(data);
     };
 
     return (

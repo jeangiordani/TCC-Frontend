@@ -9,10 +9,14 @@ import { Footer } from "../../components/Footer";
 import { BackButton } from "../../components/BackButton";
 import { registrationSchema } from "../../validations/registration";
 import { Link } from "react-router-dom";
+import { usePost } from "../../hooks/usePost";
 
 type IFormInputs = yup.InferType<typeof registrationSchema>;
 
 const Register = () => {
+    const {postData, loading: loadingPost, error: errorPost} = usePost();
+    const [success, setSuccess] = React.useState<boolean>(false);
+
     const {
         register,
         formState: { errors },
@@ -20,26 +24,29 @@ const Register = () => {
     } = useForm<IFormInputs>({
         resolver: yupResolver(registrationSchema),
     });
-    const [preview, setPreview] = React.useState("");
+    // const [preview, setPreview] = React.useState("");
 
-    const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
         if (data.role === "true") {
-            data.role = "ROLE_TEACHER";
+            data.role = "TEACHER";
         } else {
-            data.role = "ROLE_STUDENT";
+            data.role = "STUDENT";
         }
-        console.log(data);
-    };
-
-    const handleUploadedFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files ? event.target.files[0] : undefined;
-
-        if (file !== undefined) {
-            const urlImage = URL.createObjectURL(file);
-
-            setPreview(urlImage);
+        const response = await postData("/auth/register", data);
+        if (response.status === 201) {
+            setSuccess(true);
         }
     };
+
+    // const handleUploadedFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files ? event.target.files[0] : undefined;
+
+    //     if (file !== undefined) {
+    //         const urlImage = URL.createObjectURL(file);
+
+    //         setPreview(urlImage);
+    //     }
+    // };
     return (
         <>
             <Header />
@@ -73,6 +80,7 @@ const Register = () => {
                             }`}
                             placeholder="Digite seu email"
                         />
+                        {errorPost && (<div className="error">Email já existe</div>)}
                         <div className="error">{errors.email?.message}</div>
                     </div>
                     <div className="input-wrapper">
@@ -103,7 +111,7 @@ const Register = () => {
                             </span>
                         </label>
                     </div>
-                    <div className="input-wrapper">
+                    {/* <div className="input-wrapper">
                         <img src={preview} alt="" className="image-input" />
                         <label className="label" htmlFor="image">
                             Imagem
@@ -115,7 +123,7 @@ const Register = () => {
                             type="file"
                             onChange={handleUploadedFile}
                         />
-                    </div>
+                    </div> */}
                     <div className="input-wrapper">
                         <span className="label">
                             Já tem uma conta?{" "}

@@ -17,7 +17,6 @@ export const registrationSchema = yup
             .string()
             .required("Senha é obrigatória")
             .min(8, "Senha deve ter no mínimo 8 caracteres"),
-        role: yup.string().optional(),
-        image: yup.mixed().optional(),
+        role: yup.string().optional()
     })
     .required();

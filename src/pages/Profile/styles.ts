@@ -76,13 +76,13 @@ export const Content = styled.div`
             }
 
             .user-name {
-                font-size: 12px;
+                font-size: 30px;
                 font-weight: 700;
                 font-family: "Roboto-Bold";
             }
 
             .user-role {
-                font-size: 10px;
+                font-size: 20px;
                 font-weight: 500;
                 font-family: "Roboto-Regular";
                 opacity: 0.5;
