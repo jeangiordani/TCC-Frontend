@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import { loginSchema } from "../../validations/login";
 import { BackButton } from "../../components/BackButton";
 import { useAuth } from "../../context/auth";
+import React from "react";
+import { Loading } from "../../components/Spinner";
 
 type IFormInputs = yup.InferType<typeof loginSchema>;
 
 export const Login = () => {
-    const { login } = useAuth();
+    const { login, loading, setLoading } = useAuth();
+    const [errorAuth, setErrorAuth] = React.useState<string>("");
     const {
         register,
         formState: { errors },
@@ -21,9 +24,20 @@ export const Login = () => {
     } = useForm<IFormInputs>({
         resolver: yupResolver(loginSchema),
     });
-
+    console.log(loading);
+    
     const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-        login(data);
+        login(data).then(() => {
+            setLoading(false);
+        }).catch((err) => {
+            setLoading(false);
+            console.log(err.response.request.status);
+            if (err.response.request.status === 401) {
+                setErrorAuth("Email ou senha inválidos");
+            }
+        });
+        
+
     };
 
     return (
@@ -44,6 +58,7 @@ export const Login = () => {
                                 errors.email?.message ? "error-input" : ""
                             }`}
                             placeholder="Digite seu email"
+                            onChange={() => setErrorAuth("")}
                         />
                         <div className="error">{errors.email?.message}</div>
                     </div>
@@ -59,8 +74,10 @@ export const Login = () => {
                             }`}
                             type="password"
                             placeholder="Digite seu senha"
+                            onChange={() => setErrorAuth("")}
                         />
                         <div className="error">{errors.password?.message}</div>
+                    <div className="error">{errorAuth}</div>
                     </div>
                     <div className="input-wrapper">
                         <span className="label">
@@ -69,7 +86,8 @@ export const Login = () => {
                                 Cadastre-se
                             </Link>
                         </span>
-                        <input type="submit" className="button" value="Login" />
+                        {/* <input type="submit" className="button" value={loading ? <Loading/> : "Login"} disabled={loading} /> */}
+                        <button type="submit" className="button" disabled={loading}>{loading ? <Loading color="#fff" /> : "Login"}</button>
                     </div>
                 </Form>
             </Container>

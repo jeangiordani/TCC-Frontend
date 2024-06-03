@@ -8,6 +8,7 @@ import { mockExamSchema } from "../../../validations/mockExam";
 import { useFetch } from "../../../hooks/useFetch";
 import { usePost } from "../../../hooks/usePost";
 import { useAuth } from "../../../context/auth";
+import { Loading } from "../../../components/Spinner";
 
 type IFormInputs = yup.InferType<typeof mockExamSchema>;
 type Option = {
@@ -135,12 +136,19 @@ const CreateMockExam = () => {
                         </div>
                     </div>
                     <div className="button-wrapper">
-                        <input
+                        {/* <input
                             type="submit"
                             className="button"
                             value={loadingPost ? "Enviando..." : "Iniciar"}
                             disabled={loadingPost}
-                        />
+                        /> */}
+                        <button
+                            type="submit"
+                            className="button"
+                            disabled={loadingPost}
+                        >
+                            {loadingPost ? <Loading color="#fff" /> : "Iniciar"}
+                        </button>
                     </div>
                 </Form>
             </Container>

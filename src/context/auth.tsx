@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { AuthContextData, LoginType } from "../@types/authContext";
 
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: any) => {
       }, []);
 
       const login = async ({ email, password }: LoginType) => {
-        try {
+          setLoading(true);
           const res = await api.post<{ access_token: string }>("/auth/login", {
             email: email,
             password: password,
@@ -45,12 +45,12 @@ export const AuthProvider = ({ children }: any) => {
             }
           
           });
+          
           setUser(userData.data);
           localStorage.setItem("token", res.data.access_token);
           localStorage.setItem("user", JSON.stringify(userData.data));
-        } catch (err) {
-          console.error(err);
-        }
+          setLoading(false);
+          return res;
       };
     
       const logout = () => {
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: any) => {
 
     return (
         <AuthContext.Provider
-          value={{ signed: !!user, user, loading, login, logout }}
+          value={{ signed: !!user, user, loading, login, logout, setLoading }}
         >
           {children}
         </AuthContext.Provider>

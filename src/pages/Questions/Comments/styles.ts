@@ -25,12 +25,32 @@ export const CommentsContainer = styled.div<{ $formVisible?: boolean }>`
             margin-bottom: 10px;
 
             .text-border {
-                display: flex;
+                display: row;
                 flex: 1;
                 background-color: var(--secondary);
                 border-radius: 10px;
                 min-height: 70px;
                 padding: 10px;
+                
+                .info {
+                    // display: flex;
+                    // flex-direction: row;
+
+                    .name {
+                        font-family: "Roboto-Bold", sans-serif;
+                        font-size: 0.8rem;
+                        margin-right: 5px;
+                    }
+    
+                    .role {
+                        font-family: "Roboto-Bold", sans-serif;
+                        font-size: 0.6rem;
+                        color: black ;
+                        opacity: 0.5;
+                    }
+                }
+
+                
 
                 .text {
                     font-family: "Roboto-Regular", sans-serif;
@@ -64,14 +84,19 @@ export const CommentsContainer = styled.div<{ $formVisible?: boolean }>`
         }
 
         .button {
-            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 40px;
-            border-radius: 10px;
+            width: 100px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: "Roboto-Bold";
             border: none;
-            font-family: "Roboto-Bold", sans-serif;
-            cursor: pointer;
             color: white;
             background-color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
         }
 
         .button:hover {

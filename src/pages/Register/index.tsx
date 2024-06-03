@@ -2,6 +2,8 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+
 
 import { Header } from "../../components/Header";
 import { Container, Form } from "./styles";
@@ -10,12 +12,25 @@ import { BackButton } from "../../components/BackButton";
 import { registrationSchema } from "../../validations/registration";
 import { Link } from "react-router-dom";
 import { usePost } from "../../hooks/usePost";
+import { Loading } from "../../components/Spinner";
+import 'react-toastify/dist/ReactToastify.css';
 
 type IFormInputs = yup.InferType<typeof registrationSchema>;
 
 const Register = () => {
     const {postData, loading: loadingPost, error: errorPost} = usePost();
     const [success, setSuccess] = React.useState<boolean>(false);
+    const notify = () => toast.success('Cadastrado com successo', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                        });
 
     const {
         register,
@@ -32,11 +47,21 @@ const Register = () => {
         } else {
             data.role = "STUDENT";
         }
-        const response = await postData("/auth/register", data);
+        const response = await postData("/auth/register", {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            role: data.role,
+        });
         if (response.status === 201) {
             setSuccess(true);
         }
     };
+    
+    if (success) {
+        notify();
+    }
+    
 
     // const handleUploadedFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     //     const file = event.target.files ? event.target.files[0] : undefined;
@@ -54,6 +79,7 @@ const Register = () => {
                 <BackButton />
                 <h1 className="title">Cadastre-se no site</h1>
                 <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+                <ToastContainer />
                     <div className="input-wrapper">
                         <label className="label" htmlFor="name">
                             Nome
@@ -131,13 +157,18 @@ const Register = () => {
                                 Faça login
                             </Link>
                         </span>
-                        <input
+                        {/* <input
                             type="submit"
                             className="button"
                             value="Cadastrar"
-                        />
+                        /> */}
+                        <button type="submit" className="button" disabled={loadingPost}>
+                            {loadingPost ? <Loading color="#fff" /> : "Cadastrar"}
+                        </button>
+                        
                     </div>
                 </Form>
+                
             </Container>
             <Footer />
         </>

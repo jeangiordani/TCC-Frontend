@@ -24,7 +24,7 @@ const MockExams = () => {
 
     const [mockExams, setMockExams] = React.useState<MockExamProps[]>([]);
 
-    const { data, loading, error, refetch } = useFetch("/mock-exams");
+    const { data, loading, refetch } = useFetch("/mock-exams");
 
     React.useEffect(() => {
         if (data) {
@@ -70,6 +70,8 @@ const MockExams = () => {
                                 Iniciar Simulado
                             </button>
                         </span>
+                        {mockExams.length === 0 && !loading && <div style={{fontSize: "1.5rem", 
+                        fontFamily: "Roboto-Bold", color: "var(--primary"}}>Você não iniciou nenhum simulado</div>}
                         <Cards>
                             {mockExams.map((mockExam) => (
                                 <Card

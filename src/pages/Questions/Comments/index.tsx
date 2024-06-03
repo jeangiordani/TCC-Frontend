@@ -3,6 +3,11 @@ import { Container } from "./styles";
 import { CommentsContainer } from "./styles";
 
 import userPicture from "../../../assets/images/profile-picture.png";
+import { useAuth } from "../../../context/auth";
+import { useFetch } from "../../../hooks/useFetch";
+import { set } from "react-hook-form";
+import { Loading } from "../../../components/Spinner";
+import { usePost } from "../../../hooks/usePost";
 
 interface CommentsProps {
     questionId: string;
@@ -11,25 +16,22 @@ interface CommentsProps {
 type CommentType = {
     id: number;
     text: string;
-    picture: string;
+    user: {
+        id: number;
+        name: string;
+        role: string;
+    };    
 };
 
-const comments: CommentType[] = [
-    {
-        id: 1,
-        text: "Sabendo que uma porção da receita produz 50 docinhos com o volume de 4,19 cm^3, podemos calcular o volume total de uma porção: Volume total de uma porção = 50 * 4,19 = 209,5 cm^3 Agora, vamos calcular quantas porções são necessárias para atender ao cliente: Volume total necessário = 150 * 33,51 = 5026,5 cm^3",
-        picture: userPicture,
-    },
-    {
-        id: 2,
-        text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci esse natus rerum, distinctio voluptate obcaecati culpa. Nihil dolor magni autem quaerat, repudiandae animi obcaecati tempora nulla ipsum dolore pariatur in. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci esse natus rerum, distinctio voluptate obcaecati culpa. Nihil dolor magni autem quaerat, repudiandae animi obcaecati tempora nulla ipsum dolore pariatur in. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci esse natus rerum, distinctio voluptate obcaecati culpa. Nihil dolor magni autem quaerat, repudiandae animi obcaecati tempora nulla ipsum dolore pariatur in. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci esse natus rerum, distinctio voluptate obcaecati culpa. Nihil dolor magni autem quaerat, repudiandae animi obcaecati tempora nulla ipsum dolore pariatur in.",
-        picture: userPicture,
-    },
-];
 
 const Comments: React.FC<CommentsProps> = (props) => {
     const { questionId } = props;
     const [inputComment, setInputComment] = React.useState("");
+    const {user} = useAuth();
+    const [comments, setComments] = React.useState<CommentType[]>([]);
+    const { postData, loading:loadingPost } = usePost();
+
+    const { data, loading, refetch } = useFetch(`/comments/${questionId}`);
 
     const handleInputCommet = (
         event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -38,43 +40,78 @@ const Comments: React.FC<CommentsProps> = (props) => {
         console.log(inputComment);
     };
 
-    const handleSaveComment = () => {
+
+    React.useEffect(() => {
+        if(data){
+            const newComments = data.map((comment: CommentType) => {
+                return {
+                    id: comment.id,
+                    text: comment.text,
+                    user: {
+                        id: comment.user.id,
+                        name: comment.user.name,
+                        role: comment.user.role,
+                    },
+                };
+            
+            });
+            setComments(newComments);
+        }
+        
+    }, [data]);
+
+    const handleSaveComment = async () => {
         console.log("Comentário salvo");
+        await postData("/comments", {
+            text: inputComment,
+            question_id: questionId,
+            user_id: user.id,
+        });
+        refetch();
     };
 
     return (
         <>
             <Container>
+                {loading && <Loading color="var(--primary)" />}
                 <CommentsContainer $formVisible={true}>
                     <div className="comments">
                         {comments.map((comment) => (
                             <div className="comment" key={comment.id}>
                                 <div className="text-border">
-                                    <img
-                                        src={comment.picture}
-                                        alt="imagem"
-                                        className="image"
-                                    />
+                                    <div className="info">
+                                        <div className="name">{comment.user.name}</div>
+                                        <div className="role">{comment.user.role == "PROFESSOR" ? "Professor" : "Estudante"}</div>
+                                    </div>
                                     <p className="text">{comment.text}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <form className="form">
-                        <textarea
-                            name=""
-                            id=""
-                            className="input"
-                            onChange={handleInputCommet}
-                            value={inputComment}
-                        ></textarea>
-                        <input
-                            type="button"
-                            className="button"
-                            value="Enviar"
-                            onClick={handleSaveComment}
-                        />
-                    </form>
+                    {user.role == "PROFESSOR" && 
+                        <form className="form">
+                            <textarea
+                                name=""
+                                id=""
+                                className="input"
+                                onChange={handleInputCommet}
+                                value={inputComment}
+                            ></textarea>
+                            {/* <input
+                                type="button"
+                                className="button"
+                                value="Enviar"
+                                onClick={handleSaveComment}
+                            /> */}
+                            <button
+                                className="button"
+                                onClick={handleSaveComment}
+                                disabled={loadingPost}
+                            >
+                                {loadingPost ? <Loading color="#fff" /> : "Enviar"}
+                            </button>
+                        </form>
+                    }
                 </CommentsContainer>
             </Container>
         </>

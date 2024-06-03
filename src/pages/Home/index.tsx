@@ -6,6 +6,7 @@ import homeImage from "../../assets/images/Reading glasses-bro.svg";
 import { Footer } from "../../components/Footer";
 
 export const Home = () => {
+    
     return (
         <>
             <Header />

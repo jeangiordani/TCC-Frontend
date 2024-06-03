@@ -87,6 +87,9 @@ export const Form = styled.form`
         }
 
         .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 45px;
             border-radius: 5px;
             margin-top: 10px;
@@ -95,7 +98,7 @@ export const Form = styled.form`
             color: white;
             background-color: var(--primary);
             font-size: 1rem;
-        }
+          }
 
         .button:hover {
             opacity: 0.8;

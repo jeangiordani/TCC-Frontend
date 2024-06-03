@@ -8,6 +8,7 @@ import CustomModal from "../../components/Modal";
 import Comments from "./Comments";
 import { useFetch } from "../../hooks/useFetch";
 import { useAnswerQuestion } from "../../hooks/useAnswerQuestion";
+import { Loading } from "../../components/Spinner";
 
 type Alternative = {
     id: string;
@@ -22,6 +23,11 @@ type Answer = {
     alternativeId: string;
 };   
 
+type CommentType = {
+    id: number;
+    text: string;   
+};
+
 type Question = {
     id: string;
     statement: string;
@@ -29,7 +35,11 @@ type Question = {
     alternatives: Array<Alternative>;
     answer: Answer;
     image: string;
+    comments: Array<CommentType>;
+    knowledgeArea: string;
 };
+
+
 
 const Questions = () => {
     const { id } = useParams<{ id: string }>();
@@ -61,16 +71,17 @@ const Questions = () => {
                     statement: question.statement,
                     postStatement: question.post_statement,
                     alternatives,
+                    knowledgeArea: question.knowledge_area,
                     answer: {
                         id: question.answer.id,
                         correct: question.answer.is_correct,
                         alternativeId: question.answer.alternative_id,
                     },
                     image: question.image,
+                    comments: question.comments,
                 };
             });
             setQuestions(newQuestions);
-            console.log(newQuestions);
             
         }
     }, [data, loadingAnswer]);
@@ -112,6 +123,12 @@ const Questions = () => {
     };
 
     const currentQuestionData = questions[currentQuestion];
+    
+
+    if(currentQuestionData){
+        console.log(currentQuestionData);
+    }
+    
 
     return (
         <>
@@ -125,7 +142,7 @@ const Questions = () => {
             <BackButton />
             <Container>
                 {loading ? (
-                    <p>Loading...</p>
+                    <Loading color="var(--primary)" size={100}/>
                 ) : error ? (
                     <p>Error loading data</p>
                 ) : currentQuestionData ? (
@@ -183,7 +200,7 @@ const Questions = () => {
                     </div>
                     <div className="comments-button">
                         <div className="comments" onClick={openModal}>
-                            Comentários (2)
+                            Comentários ({currentQuestionData && (currentQuestionData.comments.length || 0)})
                         </div>
                         {currentQuestionData && (  
                             currentQuestionData.answer.alternativeId == null ? (
