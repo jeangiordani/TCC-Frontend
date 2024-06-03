@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
@@ -9,6 +9,7 @@ import Comments from "./Comments";
 import { useFetch } from "../../hooks/useFetch";
 import { useAnswerQuestion } from "../../hooks/useAnswerQuestion";
 import { Loading } from "../../components/Spinner";
+import { api } from "../../api/api";
 
 type Alternative = {
     id: string;
@@ -39,6 +40,14 @@ type Question = {
     knowledgeArea: string;
 };
 
+interface MockExamProps {
+    id: string;
+    title: string;
+    isCompleted: boolean;
+    progress: number;
+    qty_questions: number;
+    qty_answered: number;
+}
 
 
 const Questions = () => {
@@ -51,13 +60,23 @@ const Questions = () => {
     const [isFirstQuestion, setIsFirstQuestion] = React.useState<boolean>(true);
     const [isOpen, setIsOpen] = React.useState(false);
     const [currentQuestionId, setCurrentQuestionId] = React.useState<string>("");
+    const [currentMockExam, setCurrentMockExam] = React.useState<MockExamProps>({
+        id: "",
+        title: "",
+        isCompleted: false,
+        progress: 0,
+        qty_questions: 0,
+        qty_answered: 0,
+    });
     
     const { data, loading, error, refetch } = useFetch("/mock-exams/" + id);
     const { answerQuestion, loading: loadingAnswer } = useAnswerQuestion();
+    const navigate = useNavigate();
     
     
     React.useEffect(() => {
         if (data && data.questions) {
+            
             const newQuestions = data.questions.map((question: any) => {
                 const alternatives = question.alternatives.map((alternative: any) => ({
                     id: alternative.id,
@@ -82,10 +101,23 @@ const Questions = () => {
                 };
             });
             setQuestions(newQuestions);
-            
+
+            api.get(`/mock-exams/${id}/answers`).then((response) => {
+                const progress = Math.floor(
+                    (response.data.data.qty_answered / response.data.data.qty_questions) * 100
+                );
+                setCurrentMockExam({
+                    id: response.data.data.id,
+                    title: response.data.data.title,
+                    isCompleted: response.data.data.qty_answered === response.data.data.qty_questions,
+                    progress,
+                    qty_questions: response.data.data.qty_questions,
+                    qty_answered: response.data.data.qty_answered,
+                });
+                
+            });
         }
     }, [data, loadingAnswer]);
-
 
     React.useEffect(() => {
         setIsLastQuestion(currentQuestion === questions.length - 1);
@@ -122,12 +154,15 @@ const Questions = () => {
         }
     };
 
-    const currentQuestionData = questions[currentQuestion];
-    
+    const handleFinalAnswer = async (mockExamId: string | undefined, alternativeId: string | null) => {
+        if (alternativeId) {
+            await answerQuestion(mockExamId+"", alternativeId);
+            navigate("/simulados/"+mockExamId+"/resultado");
+            
+        }
+    };
 
-    if(currentQuestionData){
-        console.log(currentQuestionData);
-    }
+    const currentQuestionData = questions[currentQuestion];
     
 
     return (
@@ -213,6 +248,15 @@ const Questions = () => {
                             ) : (
                                 <div></div>
                             )
+                        )}
+
+                        {isLastQuestion && currentMockExam && currentMockExam.isCompleted && (
+                            <button
+                                className="answer-button"
+                                onClick={() => handleFinalAnswer(currentMockExam.id+"", null)}
+                            >
+                                Finalizar Simulado
+                            </button>
                         )}
                     </div>
                 </ButtonContainer>

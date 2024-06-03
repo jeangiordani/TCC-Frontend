@@ -88,7 +88,7 @@ const CreateMockExam = () => {
                                     className="label-inline"
                                     htmlFor="quantidade"
                                 >
-                                    Quantidade:{" "}
+                                    Quantidade de questões:{" "}
                                 </label>
                                 <input
                                     type="number"
