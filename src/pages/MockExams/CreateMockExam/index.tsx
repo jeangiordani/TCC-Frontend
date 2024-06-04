@@ -16,7 +16,7 @@ type Option = {
     name: string;
 };
 
-const CreateMockExam = () => {
+const CreateMockExam = ({closeModal}: { closeModal: () => void }) => {
     const { user } = useAuth();
     const [options, setOptions] = React.useState<Option[]>([]);
     const {data} = useFetch("/knowledge-areas");
@@ -29,6 +29,8 @@ const CreateMockExam = () => {
         resolver: yupResolver(mockExamSchema),
     });
     const {postData, loading: loadingPost} = usePost();
+
+    
 
     React.useEffect(() => {
         if (data) {
@@ -45,10 +47,12 @@ const CreateMockExam = () => {
             user_id: user.id,
             knowledge_area_id: data.disciplineId,
         });
+        closeModal();
     };
     return (
         <>
             <Container>
+                
                 <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
                         <label className="label" htmlFor="nome">

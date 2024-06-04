@@ -73,7 +73,6 @@ const Questions = () => {
     const { answerQuestion, loading: loadingAnswer } = useAnswerQuestion();
     const navigate = useNavigate();
     
-    
     React.useEffect(() => {
         if (data && data.questions) {
             
@@ -155,15 +154,16 @@ const Questions = () => {
     };
 
     const handleFinalAnswer = async (mockExamId: string | undefined, alternativeId: string | null) => {
-        if (alternativeId) {
-            await answerQuestion(mockExamId+"", alternativeId);
-            navigate("/simulados/"+mockExamId+"/resultado");
-            
-        }
+        
+        navigate("/simulados/"+mockExamId+"/resultado");
     };
 
     const currentQuestionData = questions[currentQuestion];
-    
+    if (loading) {
+        return (<div style={{width: "100%", height:"100vh", display: "flex", justifyContent: "center", alignItems:"center"}}>
+            <Loading color="var(--primary)" size={100} />;
+        </ div>);
+    }
 
     return (
         <>
@@ -242,8 +242,9 @@ const Questions = () => {
                                 <button
                                 className="answer-button"
                                 onClick={() => handleAnswer(currentQuestionData.answer.id+"", selectedOption)}
+                                disabled={loadingAnswer}
                             >
-                            {loadingAnswer ? "Respondendo..." : "Responder"}
+                            {loadingAnswer ? <Loading color="#fff" /> : "Responder"}
                             </button>
                             ) : (
                                 <div></div>

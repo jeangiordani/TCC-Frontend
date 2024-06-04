@@ -55,10 +55,9 @@ export const Content = styled.div`
     }
 
     .profile-area {
-        width: 50%;
+        width: 100%;
         height: 100%;
         border-radius: 10px;
-        border: 1px solid var(--primary);
         box-sizing: border-box;
 
         .commom-info {
@@ -92,7 +91,7 @@ export const Content = styled.div`
         .profile-info {
             margin: 0 auto;
             width: 95%;
-            height: 60%;
+            height: 100%;
 
             .email-wrapper {
                 font-family: "Roboto-Bold";
@@ -110,35 +109,27 @@ export const Content = styled.div`
             }
             .performance {
                 font-family: "Roboto-Bold";
-                color: var(--primary);
-                font-size: 1rem;
+                overflow: hidden;
+
+
+                h1 {
+                    color: var(--primary);
+                    font-size: 1rem;
+
+                }
 
                 .best {
                     font-family: "Roboto-Bold";
-                    color: white;
+                    color: var(--green);
                     font-size: 0.8rem;
-                    background-color: var(--green);
-                    width: 50%;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
                     align-items: center;
-                    border-radius: 5px;
-                    margin-bottom: 10px;
                 }
 
                 .worst {
                     font-family: "Roboto-Bold";
-                    color: white;
+                    color: var(--red);
                     font-size: 0.8rem;
-                    background-color: var(--red);
-                    width: 50%;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
                     align-items: center;
-                    border-radius: 5px;
-                    margin-bottom: 10px;
                 }
             }
 
@@ -155,6 +146,42 @@ export const Content = styled.div`
                     border-radius: 5px;
                     border: none;
                     cursor: pointer;
+                }
+            }
+
+            .cards {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                max-width: 1200px;
+                gap: 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+                .card {
+                    width: 100%;
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 10px 0px;
+                    border: 1px solid var(--primary);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    .numbers {
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                    }
+
+                    .label {
+                        font-family: "Roboto-Bold";
+                        font-size: 0.8rem;
+                        color: grey;
+                        display: flex;
+                    }
                 }
             }
         }

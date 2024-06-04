@@ -143,6 +143,9 @@ export const Form = styled.form`
             color: white;
             background-color: var(--primary);
             font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .button:hover {

@@ -19,6 +19,7 @@ export const ContentContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 `;
 
 export const Content = styled.div`
@@ -27,6 +28,7 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 
     .title-wrapper {
         width: 100%;

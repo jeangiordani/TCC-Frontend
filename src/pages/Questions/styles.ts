@@ -157,6 +157,9 @@ export const ButtonContainer = styled.div`
             border-radius: 5px;
             margin: 0 5px;
             background-color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
     @media ${device.md} {

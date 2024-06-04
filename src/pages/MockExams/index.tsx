@@ -11,6 +11,7 @@ import CreateMockExam from "./CreateMockExam";
 import mockExamIcon from "../../assets/icons/file-done-svgrepo-com.svg";
 import checkmark from "../../assets/icons/done-1478-svgrepo-com.svg";
 import { useFetch } from "../../hooks/useFetch";
+import { Loading } from "../../components/Spinner";
 
 interface MockExamProps {
     id: string;
@@ -56,22 +57,27 @@ const MockExams = () => {
             <CustomModal
                 isOpen={isOpen}
                 closeModal={closeModal}
-                Content={CreateMockExam}
+                Content={(props) => <CreateMockExam {...props} closeModal={closeModal} />}
                 title="Criar um Simulado"
             />
             <Header />
             <Container>
                 <Sidebar />
                 <ContentContainer>
-                    <Content>
+                    <Content >
                         <span className="title-wrapper">
                             <h2 className="title">Simulados</h2>
                             <button className="button" onClick={openModal}>
                                 Iniciar Simulado
                             </button>
+                            
                         </span>
+                        
                         {mockExams.length === 0 && !loading && <div style={{fontSize: "1.5rem", 
                         fontFamily: "Roboto-Bold", color: "var(--primary"}}>Você não iniciou nenhum simulado</div>}
+                        {loading ? (<div style={{width: "100%", height: "150px", display: "flex", justifyContent: "center", alignItems:"center"}}>
+                            <Loading color="var(--primary)" size={100} />;
+                        </ div>) : (
                         <Cards>
                             {mockExams.map((mockExam) => (
                                 <Card
@@ -114,7 +120,9 @@ const MockExams = () => {
                                     </div>
                                 </Card>
                             ))}
+                        
                         </Cards>
+                        )}
                     </Content>
                 </ContentContainer>
             </Container>

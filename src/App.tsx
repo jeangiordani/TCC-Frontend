@@ -85,7 +85,7 @@ const GlobalStyle = createGlobalStyle`
     --green: #0F811A;
     --green-filter:  invert(37%) sepia(29%) saturate(1908%) hue-rotate(83deg) brightness(93%) contrast(93%);
     --red: #D10000;
-    --red-filter: filter: brightness(0) saturate(100%) invert(10%) sepia(88%) saturate(5296%) hue-rotate(358deg) brightness(93%) contrast(113%);;
+    --red-filter: brightness(0) saturate(100%) invert(10%) sepia(88%) saturate(5296%) hue-rotate(358deg) brightness(93%) contrast(113%);
   }
 `;
 

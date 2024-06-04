@@ -44,13 +44,60 @@ const Profile = () => {
                                     Email: <span>{user.email}</span>
                                 </div>
                                 <div className="performance">
-                                    Desempenho:
-                                    <div className="best">
-                                        Melhor disciplina: Matemática
+                                    <h1>Desempenho:</h1>
+                                    <div className="cards">
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <h1 className="area">Filosofia</h1>
+                                            <div className="numbers">
+                                            <span className="label">Acertos: <h3 className="best">10</h3></span>
+                                            <span className="label">Erros: <h3 className="worst">100</h3></span>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
-                                    <div className="worst">
-                                        Pior disciplina: Literatura
-                                    </div>
+                                    
                                 </div>
                                 <div className="link">
                                     <button className="button" onClick={()=> handleLogout()}>Sair</button>

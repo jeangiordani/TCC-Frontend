@@ -72,7 +72,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     X
                 </div>
             </div>
-            <Content />
+            <Content closeModal={closeModal} />
         </Modal>
     );
 };
