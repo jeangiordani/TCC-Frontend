@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../utils/breakpoints";
+import { device } from "../../../utils/breakpoints";
 
 export const Container = styled.div`
     display: flex;
@@ -8,6 +8,7 @@ export const Container = styled.div`
     width: 100%;
     align-items: center;
     flex-direction: column;
+    margin-top: 20px;
 `;
 
 export const QuestionContainer = styled.div`

@@ -157,4 +157,18 @@ export const Table = styled.table`
 
     tr:nth-child(even) {
     }
+
+    .button {
+            background-color: var(--primary);
+            width: 50px;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            font-family: "Roboto-Bold", sans-serif;
+            font-size: 0.8rem;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0 5px;
+        }
 `;

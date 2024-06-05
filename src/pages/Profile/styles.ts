@@ -4,13 +4,14 @@ import { device } from "../../utils/breakpoints";
 export const Container = styled.div`
     display: flex;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 
     justify-content: center;
 
     @media ${device.sm} {
         flex-direction: column;
     }
+
 `;
 
 export const ContentContainer = styled.main`
@@ -19,17 +20,20 @@ export const ContentContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 `;
 
 export const Content = styled.div`
-    height: 100%;
-    width: 95%;
+    min-height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: hidden;
+
 
     .title-wrapper {
-        width: 100%;
+        width: 95%;
         display: flex;
         justify-content: flex-start;
         min-height: 40px;
@@ -56,7 +60,7 @@ export const Content = styled.div`
 
     .profile-area {
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         border-radius: 10px;
         box-sizing: border-box;
 
@@ -91,7 +95,9 @@ export const Content = styled.div`
         .profile-info {
             margin: 0 auto;
             width: 95%;
-            height: 100%;
+            min-height: 100%;
+            overflow-y: hidden;
+
 
             .email-wrapper {
                 font-family: "Roboto-Bold";
@@ -109,7 +115,6 @@ export const Content = styled.div`
             }
             .performance {
                 font-family: "Roboto-Bold";
-                overflow: hidden;
 
 
                 h1 {
@@ -152,21 +157,42 @@ export const Content = styled.div`
             .cards {
                 width: 100%;
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 max-width: 1200px;
                 gap: 20px;
                 margin-top: 20px;
                 margin-bottom: 20px;
+
+                
 
                 .card {
                     width: 100%;
                     background-color: white;
                     border-radius: 10px;
                     padding: 10px 0px;
-                    border: 1px solid var(--primary);
+                    border: 1px solid rgba(0, 0, 0, 0.2);
+
+                    -webkit-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
+                    -moz-box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
+                    box-shadow: 0px 0px 4px -2px rgba(110, 110, 110, 1);
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
                     align-items: center;
+                    justify-content: center;
+                    
+                    .filter-passed {
+                        filter: var(--green-filter);
+                    }
+
+                    .filter-failed {
+                        filter: var(--red-filter);
+                    }
+
+                    .icon {
+                        width: 50px;
+                        height: 40px;
+                        border-radius: 10px;
+                    }
                     
                     .numbers {
                         display: flex;
@@ -177,7 +203,7 @@ export const Content = styled.div`
                     }
 
                     .label {
-                        font-family: "Roboto-Bold";
+                        font-family: "Roboto-Regular";
                         font-size: 0.8rem;
                         color: grey;
                         display: flex;
@@ -202,7 +228,7 @@ export const Content = styled.div`
             .profile-info {
                 margin: 0 auto;
                 width: 95%;
-                height: 60%;
+                min-height: 100%;
 
                 .performance {
                     .best {
@@ -225,7 +251,7 @@ export const Content = styled.div`
             .profile-info {
                 margin: 0 auto;
                 width: 95%;
-                height: 60%;
+                min-height: 100%;
 
                 .performance {
                     .best {

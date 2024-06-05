@@ -70,7 +70,7 @@ export const StyledHeader = styled.header`
     }
 
     .name {
-        font-size: 12px;
+        font-size: 15px;
         font-weight: 700;
         font-family: "Roboto-Bold";
     }

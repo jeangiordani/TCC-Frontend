@@ -4,7 +4,7 @@ import { device } from "../../utils/breakpoints";
 
 export const Container = styled.section`
     display: flex;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     align-items: center;
     flex-direction: column;
@@ -165,9 +165,9 @@ export const ButtonArea = styled.div`
 
 export const CardArea = styled.div`
     width: 100%;
-    border-top: 1px solid var(--secondary);
-
-    height: 250px;
+    /* border-top: 1px solid var(--secondary); */
+    margin-top: 50px;
+    height: 100%;
 
     ul {
         height: 100%;
@@ -200,8 +200,9 @@ export const CardArea = styled.div`
         opacity: 50%;
     }
 
-    @media ${device.md} {
+    @media ${device.sm} {
         margin-top: 20px;
+        min-height: 90vh;
         ul {
             flex-direction: column;
             align-items: center;

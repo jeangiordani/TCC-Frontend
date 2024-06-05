@@ -169,7 +169,8 @@ const Result = () => {
                             <th className="border-radius-top-left">Questão</th>
                             <th>Alternativa Correta</th>
                             <th>Alternativa Marcada</th>
-                            <th className="border-radius-top-right">Resultado</th>
+                            <th>Resultado</th>
+                            <th className="border-radius-top-right">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -179,6 +180,9 @@ const Result = () => {
                                 <td>{question.alternatives.find((alternative) => alternative.correct)?.letter}</td>
                                 <td>{question.alternatives.find((alternative) => alternative.id === question.answer.alternativeId)?.letter}</td>
                                 <td className={question.answer.correct ? "correct" : "wrong"}>{question.answer.alternativeId != null && question.answer.correct ? "Correta" : "Errada"}</td>
+                                <td>
+                                    <a className="button" href={"/simulados/"+id+"/questao/"+question.id+"/"+index+1} target="_blank" rel="noopener noreferrer"> Ver</a>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

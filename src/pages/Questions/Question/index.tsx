@@ -1,15 +1,14 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Header } from "../../components/Header";
-import { BackButton } from "../../components/BackButton";
+import { Header } from "../../../components/Header";
 import { ButtonContainer, Container, QuestionContainer } from "./styles";
-import CustomModal from "../../components/Modal";
-import Comments from "./Comments";
-import { useFetch } from "../../hooks/useFetch";
-import { useAnswerQuestion } from "../../hooks/useAnswerQuestion";
-import { Loading } from "../../components/Spinner";
-import { api } from "../../api/api";
+import CustomModal from "../../../components/Modal";
+import Comments from "../Comments";
+import { useFetch } from "../../../hooks/useFetch";
+import { useAnswerQuestion } from "../../../hooks/useAnswerQuestion";
+import { Loading } from "../../../components/Spinner";
+import { api } from "../../../api/api";
 
 type Alternative = {
     id: string;
@@ -50,8 +49,8 @@ interface MockExamProps {
 }
 
 
-const Questions = () => {
-    const { id } = useParams<{ id: string }>();
+const Question = () => {
+    const { id, questionId } = useParams<{ id: string, questionId: string }>();
     
     const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
     const [currentQuestion, setCurrentQuestion] = React.useState<number>(0);
@@ -69,12 +68,12 @@ const Questions = () => {
         qty_answered: 0,
     });
     
-    const { data, loading, error, refetch } = useFetch("/mock-exams/" + id);
-    const { answerQuestion, loading: loadingAnswer } = useAnswerQuestion();
-    const navigate = useNavigate();
+    const { data, loading, error } = useFetch("/mock-exams/" + id + "/question/"+questionId);
+    const { loading: loadingAnswer } = useAnswerQuestion();
     
     React.useEffect(() => {
         if (data && data.questions) {
+            console.log(data.questions);
             
             const newQuestions = data.questions.map((question: any) => {
                 const alternatives = question.alternatives.map((alternative: any) => ({
@@ -132,31 +131,6 @@ const Questions = () => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(event.target.value);
     };
-    
-    const handleNextQuestion = () => {
-        if (!isLastQuestion) {
-            setCurrentQuestion((prev) => prev + 1);
-        }
-    };
-    
-    const handlePrevQuestion = () => {
-        if (!isFirstQuestion) {
-            setCurrentQuestion((prev) => prev - 1);
-        }
-    };
-
-    const handleAnswer = async (mockExamId: string | undefined, alternativeId: string | null) => {
-        if (alternativeId) {
-            await answerQuestion(mockExamId+"", alternativeId);
-            refetch();
-            
-        }
-    };
-
-    const handleFinalAnswer = async (mockExamId: string | undefined, alternativeId: string | null) => {
-        
-        navigate("/simulados/"+mockExamId+"/resultado");
-    };
 
     const currentQuestionData = questions[currentQuestion];
     if (loading) {
@@ -174,7 +148,6 @@ const Questions = () => {
                 title="Comentários"
             />
             <Header />
-            <BackButton />
             <Container>
                 {loading ? (
                     <Loading color="var(--primary)" size={100}/>
@@ -219,7 +192,7 @@ const Questions = () => {
                     </QuestionContainer>
                 ) : null}
                 <ButtonContainer>
-                    <div className="center-button">
+                    {/* <div className="center-button">
                         <button
                             className={`prev button ${isFirstQuestion ? "disabled" : ""}`}
                             onClick={handlePrevQuestion}
@@ -232,12 +205,12 @@ const Questions = () => {
                         >
                             Próximo
                         </button>
-                    </div>
+                    </div> */}
                     <div className="comments-button">
                         <div className="comments" onClick={openModal}>
                             Comentários ({currentQuestionData && (currentQuestionData.comments.length || 0)})
                         </div>
-                        {currentQuestionData && (  
+                        {/* {currentQuestionData && (  
                             currentQuestionData.answer.alternativeId == null ? (
                                 <button
                                 className="answer-button"
@@ -258,7 +231,7 @@ const Questions = () => {
                             >
                                 Finalizar Simulado
                             </button>
-                        )}
+                        )} */}
                     </div>
                 </ButtonContainer>
             </Container>
@@ -266,4 +239,4 @@ const Questions = () => {
     );
 };
 
-export default Questions;
+export default Question;

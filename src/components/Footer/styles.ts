@@ -7,6 +7,7 @@ export const Footer = styled.footer`
     align-items: center;
     justify-content: center;
     min-height: 50px;
+    max-height: 50px;
 
     div {
         font-family: "Roboto-Regular";

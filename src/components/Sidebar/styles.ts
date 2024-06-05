@@ -6,7 +6,7 @@ export const Sidebar = styled.aside`
     flex-grow: 0;
     min-width: 250px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    height: 100%;
+    min-height: 100%;
 
     .nav {
         width: 100%;
@@ -57,6 +57,7 @@ export const Sidebar = styled.aside`
 
     @media screen and (max-width: 600px) {
         max-height: 160px;
+        display: none;
     }
 
     @media screen and (min-width: 600px) and (max-width: 1000px) {
