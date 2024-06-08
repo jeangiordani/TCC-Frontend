@@ -13,6 +13,7 @@ import Questions from "./pages/Questions";
 import { ProtectedRoutes, PublicRoutes } from "./routes";
 import Result from "./pages/Result";
 import Question from "./pages/Questions/Question";
+import Resources from "./pages/Resources";
 
 const GlobalStyle = createGlobalStyle`
    *,
@@ -97,6 +98,7 @@ const App = () => {
                 <GlobalStyle />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/recursos" element={<Resources />} />
 
                     <Route element={<PublicRoutes/>}>
                       <Route path="/login" element={<Login />} />
