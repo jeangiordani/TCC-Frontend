@@ -11,7 +11,6 @@ import { useAuth } from "../../context/auth";
 
 export const Header = () => {
     const { signed, user } = useAuth();
-    const [isAuth, setIsAuth] = React.useState<boolean>(signed);
     return (
         <Container>
             <StyledHeader>

@@ -5,9 +5,9 @@ export type LoginType = {
   
 export interface AuthContextData {
     signed: boolean;
-    user?: object | null;
+    user?: any | null;
     loading: boolean;
-    login: ({}: LoginType) => Promise<void>;
+    login: ({}: LoginType) => any;
     logout: () => void;
     error?: string;
     setLoading: (loading: boolean) => void;

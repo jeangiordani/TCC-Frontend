@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: any) => {
 
       const login = async ({ email, password }: LoginType) => {
           setLoading(true);
-          const res = await api.post<{ access_token: string }>("/auth/login", {
+          const res = await api.post("/auth/login", {
             email: email,
             password: password,
           });

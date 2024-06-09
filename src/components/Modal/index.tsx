@@ -3,10 +3,14 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
+interface ContentProps {
+    closeModal: () => void;
+}
+
 interface CustomModalProps {
     isOpen: boolean;
     closeModal: () => void;
-    Content: React.ComponentType;
+    Content: React.ComponentType<ContentProps>;
     title: string;
 }
 

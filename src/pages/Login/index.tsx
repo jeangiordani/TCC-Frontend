@@ -27,7 +27,7 @@ export const Login = () => {
     console.log(loading);
     
     const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-        login(data).then(() => {
+        login({ email: data.email, password: data.password }).then(() => {
             setLoading(false);
         }).catch((err) => {
             setLoading(false);
