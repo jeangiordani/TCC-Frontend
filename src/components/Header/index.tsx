@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import { StyledHeader, Container, AuthButton } from "./styles";
-import logo from "../../assets/icons/logo-png.svg";
+import logo from "../../assets/icons/logo-no-background.svg";
 import profile from "../../assets/icons/profile-round-1346-svgrepo-com.svg";
 import exam from "../../assets/icons/exam-svgrepo-com.svg";
 import { useAuth } from "../../context/auth";
@@ -15,7 +15,7 @@ export const Header = () => {
         <Container>
             <StyledHeader>
                 <NavLink to="/" className="height">
-                    <img src={logo} alt="Logo" className="logo svg-color" />
+                    <img src={logo} alt="Logo" className="logo" />
                 </NavLink>
 
                 {signed ? (

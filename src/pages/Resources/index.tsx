@@ -55,7 +55,7 @@ const Resources = () => {
                         <td>{resource.name}</td>
                         <td>{resource.type}</td>
                         <td>{resource.subject}</td>
-                        <td><a href={resource.path} type="*" download>Download</a></td>
+                        <td><a href={import.meta.env.VITE_BACKEND_URL +"/storage/"+resource.path} target="_blank" type="*" download>Download</a></td>
                     </tr>
                 ))}
                 

@@ -24,8 +24,8 @@ export const StyledHeader = styled.header`
     }
 
     .logo {
-        width: 120px;
-        height: 60px;
+        width: 150px;
+        height: 80px;
         cursor: pointer;
     }
 

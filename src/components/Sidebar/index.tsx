@@ -28,7 +28,7 @@ export const Sidebar = () => {
                 </li>
                 <li className="nav-item">
                     {user.role === "ADMIN" && ( 
-                        <a href="http://localhost:8000/admin/login" target="_blank" className="link">
+                        <a href={ import.meta.env.VITE_BACKEND_URL + "/admin/login" }target="_blank" className="link">
                             <img src={dashboardIcon} alt="" className="icon" />
                             Dashboard
                         </a>
