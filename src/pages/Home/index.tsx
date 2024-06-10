@@ -15,7 +15,7 @@ export const Home = () => {
                     <div className="info">
                         <div className="greetings">
                             <h1 className="welcome">
-                                Bem vindo ao Portal Web ENEM
+                                Bem vindo ao Portal Estude e Responda
                             </h1>
                             <p className="info-paragraph">
                                 Plataforma projetada para ajudar a estudar. Com
