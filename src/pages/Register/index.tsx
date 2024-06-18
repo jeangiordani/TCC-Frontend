@@ -43,19 +43,20 @@ const Register = () => {
 
     const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
         if (data.role === "true") {
-            data.role = "TEACHER";
+            data.role = "PROFESSOR";
         } else {
-            data.role = "STUDENT";
+            data.role = "ALUNO";
         }
-        const response = await postData("/auth/register", {
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            role: data.role,
-        });
-        if (response.status === 201) {
-            setSuccess(true);
-        }
+        console.log(data);
+        // const response = await postData("/auth/register", {
+        //     name: data.name,
+        //     email: data.email,
+        //     password: data.password,
+        //     role: data.role,
+        // });
+        // if (response.status === 201) {
+        //     setSuccess(true);
+        // }
     };
     
     if (success) {
