@@ -47,16 +47,15 @@ const Register = () => {
         } else {
             data.role = "ALUNO";
         }
-        console.log(data);
-        // const response = await postData("/auth/register", {
-        //     name: data.name,
-        //     email: data.email,
-        //     password: data.password,
-        //     role: data.role,
-        // });
-        // if (response.status === 201) {
-        //     setSuccess(true);
-        // }
+        const response = await postData("/auth/register", {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            role: data.role,
+        });
+        if (response.status === 201) {
+            setSuccess(true);
+        }
     };
     
     if (success) {
