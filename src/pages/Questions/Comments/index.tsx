@@ -67,6 +67,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
             question_id: questionId,
             user_id: user.id,
         });
+        setInputComment("");
         refetch();
     };
 
