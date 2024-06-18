@@ -61,7 +61,7 @@ const Profile = () => {
                                 </div>
                                 {stats && (
                                     <div className="performance">
-                                        <h1>Desempenho:</h1>
+                                        {stats.length > 0 && <h1>Desempenho:</h1>}
                                         <div className="cards">
                                             {stats.map((stat) => (
                                             <div className="card" key={stat.subject}>
