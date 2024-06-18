@@ -84,7 +84,7 @@ const Comments: React.FC<CommentsProps> = (props) => {
                                         <div className="name">{comment.user.name}</div>
                                         <div className="role">{comment.user.role == "PROFESSOR" ? "Professor" : "Estudante"}</div>
                                     </div>
-                                    <p className="text">{comment.text}</p>
+                                    <p style={{whiteSpace: "pre-wrap"}} className="text">{comment.text}</p>
                                 </div>
                             </div>
                         ))}
