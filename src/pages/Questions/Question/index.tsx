@@ -50,7 +50,7 @@ interface MockExamProps {
 
 
 const Question = () => {
-    const { id, questionId } = useParams<{ id: string, questionId: string }>();
+    const { id, questionId, questionNumber } = useParams<{ id: string, questionId: string, questionNumber: string }>();
     
     const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
     const [currentQuestion, setCurrentQuestion] = React.useState<number>(0);
@@ -157,7 +157,7 @@ const Question = () => {
                     <QuestionContainer>
                         <div className="statement">
                             <h1 className="question-title">
-                                Questão {currentQuestion + 1}
+                                Questão {questionNumber}
                             </h1>
                             <p style={{whiteSpace: "pre-wrap"}} className="question-text">
                                 {currentQuestionData.statement}

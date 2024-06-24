@@ -181,7 +181,7 @@ const Result = () => {
                                 <td>{question.alternatives.find((alternative) => alternative.id === question.answer.alternativeId)?.letter}</td>
                                 <td className={question.answer.correct ? "correct" : "wrong"}>{question.answer.alternativeId != null && question.answer.correct ? "Correta" : "Errada"}</td>
                                 <td>
-                                    <a className="button" href={"/simulados/"+id+"/questao/"+question.id+"/"+index+1} target="_blank" rel="noopener noreferrer"> Ver</a>
+                                    <a className="button" href={"/simulados/"+id+"/questao/"+question.id+"/"+(index+1)} target="_blank" rel="noopener noreferrer"> Ver</a>
                                 </td>
                             </tr>
                         ))}
